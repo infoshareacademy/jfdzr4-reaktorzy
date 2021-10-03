@@ -1,7 +1,12 @@
+import { Header} from "./components/header/Header"
+
 
 function App() {
   return (
-    <h3>start</h3>
+    <>
+    <Header isLoggedIn={true} name={'Rysio'}/>
+    
+    </>
   );
 }
 

@@ -1,0 +1,105 @@
+.header__container {
+  display: grid;
+  grid-template-columns: 101px 1fr max-content max-content;;
+  background-color: white;
+  height: 85px;
+  color: rgb(24, 160, 24);
+  font-weight: bold;
+  padding: 15px;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 1px 5px #cacaca;
+}
+
+.header__logo-svg {
+  max-height: 60px;
+  fill: rgb(24, 160, 24);
+}
+
+.header__welcome {
+  grid-column: 2;
+  padding-left: 20px;
+  font-size: 22px;
+  text-shadow: 2px 1px rgb(207, 204, 204);
+}
+
+.header__button {
+  display: flex;
+  justify-content: center;
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid rgb(24, 160, 24);
+  border-radius: 0.6em;
+  color: rgb(24, 160, 24);
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 1; 
+  margin: 10px;
+  padding: 10px 15px;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  min-width: 115px;
+
+  &:hover {
+    box-shadow: 0 0 40px 40px rgb(24, 160, 24) inset;
+    color: #fff;
+    outline: 0;
+  }
+}
+
+.header__avatar-button {
+  width: 120px;
+}
+
+.header__button-signup {
+  grid-column: 3;
+}
+
+.header__button-login {
+  grid-column: 4;
+}
+
+.header__avatar-user-svg {
+  height: 30px;
+}
+
+.header__avatar {
+  position: relative;
+  width: fit-content;
+  background: white;
+  border-radius: 50%;
+  padding: 5px;
+  justify-self: center;
+  font-size: 14px;
+  grid-column: 4;
+  cursor: pointer;
+  min-width: 120px;
+  text-align: center;
+}
+
+.header__avatar-menu {
+  position: absolute;
+  background: rgb(240, 238, 238);
+  padding: 10px;
+  right: -15px;
+  min-width: 100px;
+}
+
+.header__avatar-menu--visible {
+  transition: opacity 0.5s ease-out;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header__avatar-menu--invisible {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
