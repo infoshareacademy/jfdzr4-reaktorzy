@@ -1,9 +1,13 @@
 import { ProgressBar } from './components/ProgressBar/Index'
 
+import {Tiles} from './components/tiles/Tiles'
+
+
 function App() {
   return (
     <>
-      <ProgressBar progressLevel={2} />
+    <Tiles/>
+    <ProgressBar progressLevel={2} />
     </>
   );
 }
