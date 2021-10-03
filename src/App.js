@@ -8,8 +8,9 @@ import {Tiles} from './components/tiles/Tiles'
 function App() {
   return (
     <>
-    <Navigation/>
+    
     <Header isLoggedIn={true} name={'Rysio'}/>
+    <Navigation/>
     <Tiles/>
     <ProgressBar progressLevel={2} />
     </>
