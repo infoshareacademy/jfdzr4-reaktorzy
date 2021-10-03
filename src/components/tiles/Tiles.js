@@ -22,7 +22,7 @@ export const Tiles = () =>{
 
                 <div className="tiles btn" data-title='Do not use plastic bags' >
                     <img className='tiles-img' alt="ecoShopping image" src={ecoShoppingUrl}  />
-                </div>''
+                </div>
                 <div className="tiles btn" data-title='Use eco clothes'>
                     <img className='tiles-img' alt="clothes image" src={clothesUrl} />
                 </div>  
