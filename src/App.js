@@ -1,7 +1,10 @@
+import { ProgressBar } from './components/ProgressBar/Index'
 
 function App() {
   return (
-    <h3>start</h3>
+    <>
+      <ProgressBar progressLevel={2} />
+    </>
   );
 }
 
