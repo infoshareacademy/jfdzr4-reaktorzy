@@ -3,15 +3,15 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    width: 100px;
+    width: 130px;
     background: none;
     margin: 0 auto;
 
 }
 
 .tiles-img{
-    width: 100px;
-    height: 100px;
+    width: 130px;
+    height: 130px;
     display: inline-block; 
     position: relative;
 }
@@ -45,7 +45,7 @@
     opacity: 1;
 }
 
-.btn {
+.tiles-btn {
     text-decoration: none;
     border: none;
     font-size: 16px;
@@ -55,7 +55,7 @@
 }
 
   
-.btn:active {
+.tiles-btn:active {
     transform: scale(0.98);
     box-shadow: -1px 1px 5px 5px rgba(0, 128, 0, 0.24);
 }

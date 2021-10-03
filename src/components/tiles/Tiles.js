@@ -16,32 +16,32 @@ export const Tiles = () =>{
         < div className='body-tabel'>
             <div style={{ display: 'grid', gridTemplateColumns: 'auto auto auto', padding: '10px', gridGap: '15px'}}>
             
-                <div className="tiles btn" data-title='Garbage segregation'>
+                <div className="tiles tiles-btn" data-title='Garbage segregation'>
                     <img className='tiles-img'  alt="trash image" src={trashUrl} />
                 </div>
 
-                <div className="tiles btn" data-title='Do not use plastic bags' >
+                <div className="tiles tiles-btn" data-title='Do not use plastic bags' >
                     <img className='tiles-img' alt="ecoShopping image" src={ecoShoppingUrl}  />
                 </div>
-                <div className="tiles btn" data-title='Use eco clothes'>
+                <div className="tiles tiles-btn" data-title='Use eco clothes'>
                     <img className='tiles-img' alt="clothes image" src={clothesUrl} />
                 </div>  
-                <div className="tiles btn" data-title='Used public transport'>
+                <div className="tiles tiles-btn" data-title='Used public transport'>
                     <img className='tiles-img' alt="bus image" src={busUrl} />
                 </div>
-                <div className="tiles btn" data-title='You eco action'>
+                <div className="tiles tiles-btn" data-title='You eco action'>
                     <img className='tiles-img' alt="yourEcoAction image" src={yourEcoActionUrl} />
                 </div>
-                <div className="tiles btn" data-title='User reusable dishes' >
+                <div className="tiles tiles-btn" data-title='User reusable dishes' >
                     <img className='tiles-img' alt="bottleUrl image" src={bottleUrl} />
                 </div>  
-                <div className="tiles btn" data-title='Eco dom'>
+                <div className="tiles tiles-btn" data-title='Eco dom'>
                     <img className='tiles-img' alt="homeUrl image" src={homeUrl} />
                 </div>
-                <div className="tiles btn" data-title='To plant plants'>
+                <div className="tiles tiles-btn" data-title='To plant plants'>
                     <img className='tiles-img' alt="plantUrl image" src={plantUrl} />
                 </div>
-                <div className="tiles btn" data-title='Buy eco food'>
+                <div className="tiles tiles-btn" data-title='Buy eco food'>
                     <img className='tiles-img' alt="ecoFoodUrl image" src={ecoFoodUrl}/>
                 </div>  
 
