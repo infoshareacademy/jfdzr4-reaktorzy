@@ -1,7 +1,12 @@
 
+import {Tiles} from './components/tiles/Tiles'
+
+
 function App() {
   return (
-    <h3>start</h3>
+    <>
+    <Tiles/>
+    </>
   );
 }
 
