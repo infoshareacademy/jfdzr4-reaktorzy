@@ -1,18 +1,15 @@
-import { Header} from "./components/header/Header"
+import { Header } from "./components/header/Header"
 import { Navigation } from "./components/navigation/nav"
-import { ProgressBar } from './components/ProgressBar/Index'
-import {Tiles} from './components/tiles/Tiles'
+import { Content } from './components/content/index'
 
 
 
 function App() {
   return (
     <>
-    
-    <Header isLoggedIn={true} name={'Rysio'}/>
-    <Navigation/>
-    <Tiles/>
-    <ProgressBar progressLevel={2} />
+      <Header isLoggedIn={true} name={'Rysio'} />
+      <Navigation />
+      <Content />
     </>
   );
 }
