@@ -1,7 +1,10 @@
 import { Wrapper } from '../wrapper/index'
+import { ProgressBar } from '../progressBar/Index'
+import { Tiles } from '../tiles/Tiles'
 
 export const Home = () => {
     return <Wrapper>
-        <h1> home page</h1>
+        <Tiles />
+        <ProgressBar progressLevel={2} />
     </Wrapper>
 }

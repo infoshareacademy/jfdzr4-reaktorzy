@@ -1,7 +1,7 @@
 import { WrapperStyle } from './styled'
 
-export const Wrapper = ({ children }) => {
+export const Wrapper = (props) => {
     return <WrapperStyle>
-        {children}
+        {props.children}
     </WrapperStyle>
 }
