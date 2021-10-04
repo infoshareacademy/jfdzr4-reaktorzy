@@ -1,10 +1,16 @@
-import { ContentStyle } from './styled'
+import { Switch, Route } from 'react-router-dom';
 
-import { Home } from '../home/index'
+import { ContentStyle } from './styled';
+
+import { Home } from '../home/index';
 
 
-export const Content = () => {
-    return <ContentStyle>
-        <Home />
-    </ContentStyle>
-}
+export const Content = () => (
+    <Switch>
+        <Route path='/'>
+            <ContentStyle>
+                <Home />
+            </ContentStyle>
+        </Route>
+    </Switch>
+)
