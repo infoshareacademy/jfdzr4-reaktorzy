@@ -2,18 +2,16 @@ import { createContext, useState } from "react";
 
 export const ProgressContex = createContext(0)
 
-
 export const ProgressContexProvider = ({children}) =>{
 
-    const [progressLevel, setProgressLevel] = useState(0);
+    const [progressLevel, useProgressLevel] = useState(0)
+
     return(
-        <>
-        <ProgressContex.Provider value ={{
+        <ProgressContex.Provider value={{
             progressLevel,
-            setProgressLevel
+            useProgressLevel
         }}>
             {children}
         </ProgressContex.Provider>
-        </>
     )
 }
