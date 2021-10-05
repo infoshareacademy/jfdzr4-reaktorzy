@@ -4,13 +4,17 @@ import { ContentStyle } from './styled';
 
 import { Home } from '../home/index';
 
+import { UsersActivityProvider } from '../../controllers/user-activity/index'
+
 
 export const Content = () => (
     <Switch>
-        <Route path='/'>
-            <ContentStyle>
-                <Home />
-            </ContentStyle>
-        </Route>
+        <UsersActivityProvider>
+            <Route path='/'>
+                <ContentStyle>
+                    <Home />
+                </ContentStyle>
+            </Route>
+        </UsersActivityProvider>
     </Switch>
 )
