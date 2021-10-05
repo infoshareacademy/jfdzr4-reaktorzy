@@ -4,12 +4,12 @@ export const ProgressContex = createContext(0)
 
 export const ProgressContexProvider = ({children}) =>{
 
-    const [progressLevel, useProgressLevel] = useState(0)
+    const [progressLevel, setProgressLevel] = useState(0)
 
     return(
         <ProgressContex.Provider value={{
             progressLevel,
-            useProgressLevel
+            setProgressLevel
         }}>
             {children}
         </ProgressContex.Provider>

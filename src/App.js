@@ -1,7 +1,7 @@
 import { ProgressContexProvider } from "./components/context/ProgressContex";
 import { Header} from "./components/header/Header"
 import { Navigation } from "./components/navigation/nav"
-import { ProgressBar } from './components/ProgressBar/Index'
+import { ProgressBar } from './components/progressBar/Index'
 import {Tiles} from './components/tiles/Tiles'
 
 

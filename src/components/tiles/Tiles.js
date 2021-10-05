@@ -8,7 +8,7 @@ import bottleUrl from '../assets/5.bottle.png'
 import homeUrl from '../assets/6.home.png'
 import plantUrl from '../assets/7.plant.png'
 import ecoFoodUrl from '../assets/9.ecoFood.png'
-import {useState, useContext, useEffect} from 'react'
+import {useContext, useEffect} from 'react'
 import { ProgressContex} from '../context/ProgressContex';
 
 
@@ -21,6 +21,7 @@ export const Tiles = () =>{
     const addPoint = () =>{
         setProgressLevel(progressLevel + 1)
     }
+
     useEffect(()=>{
         if(progressLevel === 9){
             setProgressLevel(0)
