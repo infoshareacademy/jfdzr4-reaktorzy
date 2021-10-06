@@ -1,5 +1,5 @@
 import { Wrapper } from '../wrapper/index'
-import { ProgressBar } from '../progressBar/Index'
+import { ProgressBar } from '../ProgressBar/Index'
 import { Tiles } from '../tiles/Tiles'
 
 export const Home = () => {
