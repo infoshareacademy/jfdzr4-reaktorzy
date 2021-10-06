@@ -1,16 +1,28 @@
+import { createContext, useState, useEffect } from 'react'
+
 import { DATABASE_URL } from '../../firebase-config'
 
-export const UsersActivityProvider = ({ children }) => {
+export const UserActivity = createContext({});
 
-    fetch(`${DATABASE_URL}/usersActivity.json`)
-        .then(r => r.json())
-        .then(data => {
-            const formattedData = Object.keys(data).map(key => ({ id: key, ...data[key] }));
-            formattedData.map((usersActivity) => {
-                return console.log(usersActivity.id)
+export const UserActivityProvider = ({ children }) => {
+
+    const [userActivityDate, setUserActivityDate] = useState({})
+
+    useEffect(() => {
+        fetch(`${DATABASE_URL}/users.json`)
+            .then(r => r.json())
+            .then(data => {
+                if (data) {
+                    const date = data.id123
+                    setUserActivityDate(date)
+                }
             })
-        })
-    return <>
+    }, [])
+
+    return <UserActivity.Provider value={{
+        userActivityDate,
+        setUserActivityDate
+    }}>
         {children}
-    </>
+    </UserActivity.Provider>
 }
