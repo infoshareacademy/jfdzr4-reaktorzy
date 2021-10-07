@@ -14,6 +14,7 @@ export const UserActivityProvider = ({ children }) => {
             .then(data => {
                 if (data) {
                     const date = data.id123
+                    console.log(date)
                     setUserActivityDate(date)
                 }
             })
