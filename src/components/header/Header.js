@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./Header.scss";
 import Logo from "./logo-eco-friendly.svg";
+import { Link } from 'react-router-dom';
 // import Avatar from './Avatar-icons-user.svg';
 
 import * as React from "react";
@@ -33,7 +34,10 @@ export function Header({ isLoggedIn, name }) {
   return (
     <header className="header__container">
       <div className="header__logo">
+      <Link to="/">
         <img className="header__logo-svg" src={Logo} alt="Green  eco tree" />
+      </Link>
+        
       </div>
 
       {!isLoggedIn && (
