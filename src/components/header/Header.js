@@ -16,6 +16,17 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
+import Button from '@mui/material/Button';
+
+
+import { styled } from '@mui/material/styles';
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  backgroundColor: 'rgb(24, 140, 24)',
+  '&:hover': {
+    backgroundColor: 'rgb(24, 140, 24)',
+  },
+}));
 
 export function Header({ isLoggedIn, name }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -42,12 +53,14 @@ export function Header({ isLoggedIn, name }) {
 
       {!isLoggedIn && (
         <>
-          <button className={"header__button header__button-signup"}>
+          {/* <button className={"header__button header__button-signup"}>
             Sign up
-          </button>
-          <button className={"header__button header__button-login"}>
+          </button> */}
+          <ColorButton variant="contained" className={'header__button-signup'}>Sign up</ColorButton>
+          {/* <button className={"header__button header__button-login"}>
             Log in
-          </button>
+          </button> */}
+            <ColorButton variant="contained" className={'header__button-login'}>Log in</ColorButton>
         </>
       )}
 

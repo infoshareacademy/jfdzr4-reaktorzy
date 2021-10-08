@@ -11,7 +11,10 @@ import Checkbox from '@mui/material/Checkbox';
 
 
 function createData(date, segregation, bags, clothes, transport, action, dishes, home, plants, food) {
-  return { date, segregation, bags, clothes, transport, action, dishes, home, plants, food};
+  return { date, segregation, bags, clothes, transport, action, dishes, home, plants, food };
+}
+const setTotal = (args) => {
+
 }
 
 const allRows = [
@@ -37,16 +40,23 @@ export const History = () => {
     const [rows, setRows] = useState(allRows)
 
     useEffect(()=> {
-        setRows(allRows)
+        setRows(calculateTotal(rows))
     },[])
 
     const handleClick = (event,index, name) => {
-        
-        // const modifiedRow = rows[index] = {
-        //     ...rows[index],
-        //     name: event.target.checked
-        // }
+      const rowsCopy = [...rows];
+      
+      rowsCopy[index][name] = event.target.checked;
 
+      setRows(calculateTotal(rowsCopy))
+
+    }
+
+    const calculateTotal = (rows) => {
+      return rows.map(row => {
+        const total = Object.values(row).filter(value => typeof value === 'boolean' && value === true).length
+        return {...row, total}
+      })
     }
 
     return(
@@ -73,17 +83,17 @@ export const History = () => {
                 key={row.name}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell component="th" scope="row">{row.date}</TableCell>
-                <TableCell align="center">{ <Checkbox checked={row.segregation} onClick={(e)=> {handleClick(e, index, 'segregation')}}color="success" />}</TableCell>
-                <TableCell align="center">{ <Checkbox checked={row.bags} color="success" />}</TableCell>
-                <TableCell align="center">{ <Checkbox checked={row.clothes} color="success" />}</TableCell>
-                <TableCell align="center">{ <Checkbox checked={row.transport} color="success" />}</TableCell>
-                <TableCell align="center">{ <Checkbox checked={row.action} color="success" />}</TableCell>
-                <TableCell align="center">{ <Checkbox checked={row.dishes} color="success" />}</TableCell>
-                <TableCell align="center">{ <Checkbox checked={row.home} color="success" />}</TableCell>
-                <TableCell align="center">{ <Checkbox checked={row.plants} color="success" />}</TableCell>
-                <TableCell align="center">{ <Checkbox checked={row.food} color="success" />}</TableCell>
-                <TableCell align="center">{row.fat}</TableCell>
+                <TableCell component="th" scope="row"><b>{row.date}</b></TableCell>
+                <TableCell align="center">{ <Checkbox checked={row.segregation} onClick={(e)=> {handleClick(e, index, 'segregation')}} color="success" />}</TableCell>
+                <TableCell align="center">{ <Checkbox checked={row.bags} onClick={(e)=> {handleClick(e, index, 'bags')}} color="success" />}</TableCell>
+                <TableCell align="center">{ <Checkbox checked={row.clothes} onClick={(e)=> {handleClick(e, index, 'clothes')}} color="success" />}</TableCell>
+                <TableCell align="center">{ <Checkbox checked={row.transport} onClick={(e)=> {handleClick(e, index, 'transport')}} color="success" />}</TableCell>
+                <TableCell align="center">{ <Checkbox checked={row.action} onClick={(e)=> {handleClick(e, index, 'action')}} color="success" />}</TableCell>
+                <TableCell align="center">{ <Checkbox checked={row.dishes} onClick={(e)=> {handleClick(e, index, 'dishes')}} color="success" />}</TableCell>
+                <TableCell align="center">{ <Checkbox checked={row.home} onClick={(e)=> {handleClick(e, index, 'home')}} color="success" />}</TableCell>
+                <TableCell align="center">{ <Checkbox checked={row.plants} onClick={(e)=> {handleClick(e, index, 'plants')}} color="success" />}</TableCell>
+                <TableCell align="center">{ <Checkbox checked={row.food} onClick={(e)=> {handleClick(e, index, 'food')}} color="success" />}</TableCell>
+                <TableCell align="center"><b>{row.total}</b></TableCell>
               </TableRow>
             ))}
           </TableBody>

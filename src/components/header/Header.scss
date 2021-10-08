@@ -1,9 +1,10 @@
 .header__container {
   display: grid;
-  grid-template-columns: 101px 1fr max-content max-content;;
+  grid-template-columns: 101px 1fr max-content max-content;
+  grid-column-gap: 10px;
   background-color: white;
   height: 85px;
-  color: rgb(24, 160, 24);
+  color: rgb(24, 140, 24);
   font-weight: bold;
   padding: 15px;
   align-items: center;
@@ -13,7 +14,7 @@
 
 .header__logo-svg {
   max-height: 65px;
-  fill: rgb(24, 160, 24);
+  fill: rgb(24, 140, 24);
 }
 
 .header__welcome {
@@ -30,9 +31,9 @@
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid rgb(24, 160, 24);
+  border: 2px solid rgb(24, 140, 24);
   border-radius: 0.6em;
-  color: rgb(24, 160, 24);
+  color: rgb(24, 140, 24);
   cursor: pointer;
   display: flex;
   align-self: center;
@@ -49,7 +50,7 @@
   min-width: 115px;
 
   &:hover {
-    box-shadow: 0 0 40px 40px rgb(24, 160, 24) inset;
+    box-shadow: 0 0 40px 40px rgb(24, 140, 24) inset;
     color: #fff;
     outline: 0;
   }

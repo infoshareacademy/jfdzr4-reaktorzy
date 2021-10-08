@@ -20,7 +20,7 @@ function App() {
     <>
     <Router>
       <ProgressContexProvider>
-        <Header isLoggedIn={true} name={'Rysio'} />
+        <Header isLoggedIn={false} name={'Rysio'} />
         <Navigation />
       
         <Switch>
