@@ -13,7 +13,7 @@ import Checkbox from '@mui/material/Checkbox';
 function createData(date, segregation, bags, clothes, transport, action, dishes, home, plants, food) {
   return { date, segregation, bags, clothes, transport, action, dishes, home, plants, food };
 }
-const setTotal = (args) => {
+const setTotal = () => {
 
 }
 

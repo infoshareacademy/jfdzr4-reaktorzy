@@ -1,10 +1,10 @@
-import { useState } from "react";
+import React, { useState, useContext} from "react";
 import "./Header.scss";
 import Logo from "./logo-eco-friendly.svg";
 import { Link } from 'react-router-dom';
+import { UserActivity } from "../../controllers/user-activity";
 // import Avatar from './Avatar-icons-user.svg';
 
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -28,10 +28,13 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export function Header({ isLoggedIn, name }) {
+export function Header() {
+
+  const {isLoggedIn, setIsLoggedIn, userName} = useContext(UserActivity)
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const firstLetterName = name.charAt(0).toUpperCase()
+  const firstLetterName = userName.charAt(0).toUpperCase()
   
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -66,7 +69,7 @@ export function Header({ isLoggedIn, name }) {
 
       {isLoggedIn && (
         <>
-          <div className="header__welcome">"Welcome Eco {name}"</div>
+          <div className="header__welcome">"Welcome Eco {userName}"</div>
           <Box
             sx={{ display: "flex", alignItems: "center", textAlign: "center" }}
           >
@@ -123,7 +126,7 @@ export function Header({ isLoggedIn, name }) {
               </ListItemIcon>
               Settings
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={()=> setIsLoggedIn(false)}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
