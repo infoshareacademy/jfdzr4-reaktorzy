@@ -5,12 +5,10 @@ import {
 } from "react-router-dom";
 
 import { ProgressContexProvider } from "./components/context/ProgressContex";
+import { UserActivityProvider } from './controllers/user-activity/index'
 import { Header } from "./components/header/Header"
 import { Navigation } from "./components/navigation/nav"
 import { Content } from './components/content/index'
-import { Tiles } from './components/tiles/Tiles'
-import { ProgressBar } from './components/ProgressBar/Index'
-import { History } from "./components/history/History";
 
 
 
@@ -20,18 +18,11 @@ function App() {
     <>
     <Router>
       <ProgressContexProvider>
-        <Header isLoggedIn={false} name={'Rysio'} />
-        <Navigation />
-      
-        <Switch>
-            <Route path="/" exact>
-              <Tiles />
-              <ProgressBar />
-            </Route>
-            <Route path="/history">
-              <History/>
-            </Route>
-        </Switch>
+        <UserActivityProvider>
+          <Header isLoggedIn={true} name={'Rysio'} />
+          <Navigation />
+          <Content />
+        </UserActivityProvider>
       </ProgressContexProvider>
     </Router>
     </>
