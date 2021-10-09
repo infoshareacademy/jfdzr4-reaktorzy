@@ -37,3 +37,12 @@
   background-color: #4AA96C;
   opacity: 0.3;
 }
+
+.navigation-link {
+  color: #00a19d;
+  text-decoration: none;
+}
+
+.navigation-link:hover{
+  color: #ffffff
+}

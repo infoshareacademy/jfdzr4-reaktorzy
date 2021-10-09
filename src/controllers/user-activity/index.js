@@ -7,6 +7,9 @@ export const UserActivity = createContext({});
 export const UserActivityProvider = ({ children }) => {
 
     const [userActivityDate, setUserActivityDate] = useState({})
+    const [isLoggedIn, setIsLoggedIn] = useState(true)
+    
+    const userName = 'Richard'
 
     useEffect(() => {
         fetch(`${DATABASE_URL}/users.json`)
@@ -22,7 +25,10 @@ export const UserActivityProvider = ({ children }) => {
 
     return <UserActivity.Provider value={{
         userActivityDate,
-        setUserActivityDate
+        setUserActivityDate,
+        isLoggedIn,
+        setIsLoggedIn,
+        userName
     }}>
         {children}
     </UserActivity.Provider>
