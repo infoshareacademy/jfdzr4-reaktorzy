@@ -63,7 +63,7 @@ export function Header() {
           {/* <button className={"header__button header__button-login"}>
             Log in
           </button> */}
-            <ColorButton variant="contained" className={'header__button-login'}>Log in</ColorButton>
+            <ColorButton variant="contained" className={'header__button-login'} onClick={()=>{setIsLoggedIn(true)}}>Log in</ColorButton>
         </>
       )}
 
