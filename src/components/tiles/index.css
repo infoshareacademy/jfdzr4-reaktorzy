@@ -54,7 +54,6 @@
     transition: 0.5s all;
 }
 
-  
 .tiles-btn:active {
     transform: scale(0.98);
     box-shadow: -1px 1px 5px 5px rgba(0, 128, 0, 0.24);
