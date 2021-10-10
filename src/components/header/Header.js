@@ -1,4 +1,4 @@
-import React, { useState, useContext} from "react";
+import React, { useState, useContext } from "react";
 import "./Header.scss";
 import Logo from "./logo-eco-friendly.svg";
 import { Link } from 'react-router-dom';
@@ -18,7 +18,7 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Button from '@mui/material/Button';
 
-import Navigation from "../navigation";
+import Navigation from "../navigation/nav";
 
 import { styled } from '@mui/material/styles';
 
@@ -31,12 +31,12 @@ const ColorButton = styled(Button)(({ theme }) => ({
 
 export function Header() {
 
-  const {isLoggedIn, setIsLoggedIn, userName} = useContext(UserActivity)
+  const { isLoggedIn, setIsLoggedIn, userName } = useContext(UserActivity)
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const firstLetterName = userName.charAt(0).toUpperCase()
-  
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -49,10 +49,10 @@ export function Header() {
   return (
     <header className="header__container">
       <div className="header__logo">
-      <Link to="/">
-        <img className="header__logo-svg" src={Logo} alt="Green  eco tree" />
-      </Link>
-        
+        <Link to="/">
+          <img className="header__logo-svg" src={Logo} alt="Green  eco tree" />
+        </Link>
+
       </div>
 
       {!isLoggedIn && (
@@ -64,7 +64,7 @@ export function Header() {
           {/* <button className={"header__button header__button-login"}>
             Log in
           </button> */}
-            <ColorButton variant="contained" className={'header__button-login'} onClick={()=>{setIsLoggedIn(true)}}>Log in</ColorButton>
+          <ColorButton variant="contained" className={'header__button-login'} onClick={() => { setIsLoggedIn(true) }}>Log in</ColorButton>
         </>
       )}
 
@@ -127,7 +127,7 @@ export function Header() {
               </ListItemIcon>
               Settings
             </MenuItem>
-            <MenuItem onClick={()=> setIsLoggedIn(false)}>
+            <MenuItem onClick={() => setIsLoggedIn(false)}>
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
