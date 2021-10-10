@@ -7,7 +7,7 @@ export const ProgressBarWrapper = (props) => {
             alignItems: 'center',
             width: '100%',
             height: '80px',
-            backgroundColor: 'grey',
+            backgroundColor: 'lightgrey',
         }}>
             {props.children}
         </div>
