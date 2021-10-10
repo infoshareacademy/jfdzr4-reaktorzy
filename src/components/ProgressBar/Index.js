@@ -1,8 +1,11 @@
 import { ProgressBarWrapper } from './ProgressBarWrapper'
 import { Leaf } from './Leaf'
+import { useContext } from 'react';
+import { ProgressContex} from '../context/ProgressContex';
 
-export const ProgressBar = ({ progressLevel }) => {
-
+export const ProgressBar = () => {
+    
+    const {progressLevel} = useContext(ProgressContex)
     const arrayLeaf = [];
     for (let index = 0; index < 9; index++) {
         if (index < progressLevel) {
