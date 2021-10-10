@@ -53,7 +53,7 @@ export const Tiles = () =>{
                 {
                     buttons.map(button=>
                         button.isDisabled
-                        ?<button className="tiles tiles-shadow" key={button.id} onClick={()=> allFunction(button.id)} disabled={button.isDisabled}>
+                        ?<button className='tiles tiles-shadow' key={button.id} onClick={()=> allFunction(button.id)} disabled={button.isDisabled}>
                             {<img className='tiles-img' alt={button.alt} src={button.src} />}
                         </button>
                         :
