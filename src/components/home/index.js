@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-
 import { Wrapper } from '../wrapper/index'
 import { ProgressBar } from '../progressBar/Index'
 import { Tiles } from '../tiles/Tiles'
