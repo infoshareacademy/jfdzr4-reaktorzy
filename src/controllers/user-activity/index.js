@@ -8,17 +8,17 @@ export const UserActivityProvider = ({ children }) => {
 
     const [userActivityDate, setUserActivityDate] = useState({})
     const [isLoggedIn, setIsLoggedIn] = useState(true)
-    
+
     const userName = 'Richard'
 
     useEffect(() => {
-        fetch(`${DATABASE_URL}/users.json`)
+        fetch(`${DATABASE_URL}/users/id1.json`)
             .then(r => r.json())
             .then(data => {
                 if (data) {
-                    const date = data.id123
-                    console.log(date)
-                    setUserActivityDate(date)
+                    const formatedData = Object.keys(data).map(key => ({ date: key, ...data[key] }));
+                    console.log(formatedData)
+                    setUserActivityDate(formatedData)
                 }
             })
     }, [])
