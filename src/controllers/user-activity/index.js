@@ -11,20 +11,23 @@ export const UserActivityProvider = ({ children }) => {
 
     const userName = 'Richard'
 
-    useEffect(() => {
+    const loadUserActivityData = () => {
         fetch(`${DATABASE_URL}/users/id1.json`)
             .then(r => r.json())
             .then(data => {
                 if (data) {
                     const formatedData = Object.keys(data).map(key => ({ date: key, ...data[key] }));
-                    console.log(formatedData)
-                    setUserActivityDate(formatedData)
+                    setUserActivityDate(formatedData.slice(-10))
                 }
             })
+    }
+    useEffect(() => {
+        loadUserActivityData()
     }, [])
 
     return <UserActivity.Provider value={{
         userActivityDate,
+        loadUserActivityData,
         setUserActivityDate,
         isLoggedIn,
         setIsLoggedIn,

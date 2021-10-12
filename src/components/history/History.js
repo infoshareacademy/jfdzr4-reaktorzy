@@ -10,6 +10,8 @@ import { green } from '@mui/material/colors';
 import Checkbox from '@mui/material/Checkbox';
 import { UserActivity } from '../../controllers/user-activity/index'
 
+import { DATABASE_URL } from '../../firebase-config'
+
 
 /* function createData(date, segregation, bags, clothes, transport, action, dishes, home, plants, food) {
   return { date, segregation, bags, clothes, transport, action, dishes, home, plants, food };
@@ -37,22 +39,35 @@ const setTotal = () => {
 // }
 
 export const History = () => {
-  const { userActivityDate } = useContext(UserActivity)
+  const { userActivityDate, loadUserActivityData } = useContext(UserActivity)
+  loadUserActivityData();
   const allRows = userActivityDate
   const [rows, setRows] = useState(allRows)
+  let dateClicked = ''
 
 
   useEffect(() => {
     setRows(calculateTotal(rows))
   }, [])
 
+  const updateActivityInDatabase = (rows, date) => {
+    let activity = {}
+    rows.map(row => {
+      const { date, total, ...rest } = row
+      activity = rest
+    })
+    fetch(`${DATABASE_URL}/users/id1/${date}.json`, {
+      method: 'PUT',
+      body: JSON.stringify(activity)
+    })
+  }
+
   const handleClick = (event, index, name) => {
     const rowsCopy = [...rows];
-
     rowsCopy[index][name] = event.target.checked;
-
     setRows(calculateTotal(rowsCopy))
-
+    dateClicked = userActivityDate[index].date
+    updateActivityInDatabase(rows, dateClicked)
   }
 
   const calculateTotal = (rows) => {
