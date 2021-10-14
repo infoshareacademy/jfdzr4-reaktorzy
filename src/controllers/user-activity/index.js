@@ -1,17 +1,18 @@
 import { createContext, useState, useEffect } from 'react'
-
 import { DATABASE_URL } from '../../firebase-config'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export const UserActivity = createContext({});
 
 export const UserActivityProvider = ({ children }) => {
-
+    const [user, setUser] = useState(null);
     const [userActivityDate, setUserActivityDate] = useState({})
-    const [isLoggedIn, setIsLoggedIn] = useState(true)
     
     const userName = 'Richard'
 
     useEffect(() => {
+        listenOnAuthStateChanged();
+
         fetch(`${DATABASE_URL}/users.json`)
             .then(r => r.json())
             .then(data => {
@@ -23,11 +24,23 @@ export const UserActivityProvider = ({ children }) => {
             })
     }, [])
 
+    const listenOnAuthStateChanged = () => {
+        const auth = getAuth();
+
+        onAuthStateChanged(auth, (user) => {
+            setUser(user);
+
+            if (user) {
+                console.log(user)
+       
+            } 
+        });
+    }
+
     return <UserActivity.Provider value={{
         userActivityDate,
         setUserActivityDate,
-        isLoggedIn,
-        setIsLoggedIn,
+        isLoggedIn: user,
         userName
     }}>
         {children}

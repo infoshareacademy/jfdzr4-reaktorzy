@@ -1,25 +1,22 @@
 import { ProgressContexProvider } from "./components/context/ProgressContex";
 import { UserActivityProvider } from './controllers/user-activity/index'
 import { Header } from "./components/header/Header"
-import { Navigation } from "./components/navigation/nav"
 import { Content } from './components/content/index'
-
+// import {ThemeProvider} from "./App.styled";
 import { AppWrapper } from './components/AppWrapper/AppWrapper'
 
 function App() {
 
   return (
-    // <AppWrapper>
+     <AppWrapper>
       <ProgressContexProvider>
         <UserActivityProvider>
           <Header/>
-          <Navigation />
           <Content />
         </UserActivityProvider>
       </ProgressContexProvider>
-    // </AppWrapper>
+     </AppWrapper>
   );
 }
-
 
 export default App;
