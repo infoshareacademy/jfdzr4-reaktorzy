@@ -10,13 +10,13 @@ function App() {
 
   return (
     // <AppWrapper>
-      <ProgressContexProvider>
-        <UserActivityProvider>
-          <Header/>
-          <Navigation />
-          <Content />
-        </UserActivityProvider>
-      </ProgressContexProvider>
+    <ProgressContexProvider>
+      <UserActivityProvider>
+        <Header />
+        <Navigation />
+        <Content />
+      </UserActivityProvider>
+    </ProgressContexProvider>
     // </AppWrapper>
   );
 }

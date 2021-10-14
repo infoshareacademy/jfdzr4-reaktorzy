@@ -48,7 +48,7 @@ export const History = () => {
 
   useEffect(() => {
     setRows(calculateTotal(rows))
-  }, [])
+  }, [rows])
 
   const updateActivityInDatabase = (rows, date) => {
     let activity = {}

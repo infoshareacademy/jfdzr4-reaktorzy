@@ -21,9 +21,6 @@ export const UserActivityProvider = ({ children }) => {
                 }
             })
     }
-    useEffect(() => {
-        loadUserActivityData()
-    }, [])
 
     return <UserActivity.Provider value={{
         userActivityDate,
