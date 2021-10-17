@@ -8,7 +8,7 @@ import bottleUrl from '../assets/5.bottle.png'
 import homeUrl from '../assets/6.home.png'
 import plantUrl from '../assets/7.plant.png'
 import ecoFoodUrl from '../assets/9.ecoFood.png'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import { getCurrentDate } from '../../controllers/get-date/getDate'
 import { DATABASE_URL } from '../../firebase-config'
 
@@ -16,6 +16,7 @@ export const Tiles = () => {
 
     const [progressLevel, setProgressLevel] = useState(0)
     const [activity, setActivity] = useState({})
+    const [dateActivity, setDateActivity] = useState({})
 
     const currentDate = getCurrentDate();
 
@@ -24,15 +25,15 @@ export const Tiles = () => {
     }
 
     const [buttons, setButtons] = useState([
-        { id: 1, title: 'Garbage segregation', isDisabled: false, alt: 'trash image', src: trashUrl },
-        { id: 2, title: 'Do not use plastic bags', isDisabled: false, alt: 'trash image', src: ecoShoppingUrl },
-        { id: 3, title: 'Use eco clothes', isDisabled: false, alt: 'trash image', src: clothesUrl },
-        { id: 4, title: 'Use public transport', isDisabled: false, alt: 'trash image', src: busUrl },
-        { id: 5, title: 'Garbage You eco action', isDisabled: false, alt: 'trash image', src: yourEcoActionUrl },
-        { id: 6, title: 'Use reusable dishes', isDisabled: false, alt: 'trash image', src: bottleUrl },
-        { id: 7, title: 'Eco dom', isDisabled: false, alt: 'trash image', src: homeUrl },
-        { id: 8, title: 'To plant plants', isDisabled: false, alt: 'trash image', src: plantUrl },
-        { id: 9, title: 'Buy eco food', isDisabled: false, alt: 'trash image', src: ecoFoodUrl }
+        { id: 1, title: 'Garbage segregation', ecoAction: 'segregation', isDisabled: false, alt: 'trash image', src: trashUrl },
+        { id: 2, title: 'Do not use plastic bags', ecoAction: 'bags', isDisabled: false, alt: 'trash image', src: ecoShoppingUrl },
+        { id: 3, title: 'Use eco clothes', ecoAction: 'clothes', isDisabled: false, alt: 'trash image', src: clothesUrl },
+        { id: 4, title: 'Use public transport', ecoAction: 'transport', isDisabled: false, alt: 'trash image', src: busUrl },
+        { id: 5, title: 'Garbage You eco action', ecoAction: 'action', isDisabled: false, alt: 'trash image', src: yourEcoActionUrl },
+        { id: 6, title: 'Use reusable dishes', ecoAction: 'dishes', isDisabled: false, alt: 'trash image', src: bottleUrl },
+        { id: 7, title: 'Eco dom', ecoAction: 'home', isDisabled: false, alt: 'trash image', src: homeUrl },
+        { id: 8, title: 'To plant plants', ecoAction: 'plants', isDisabled: false, alt: 'trash image', src: plantUrl },
+        { id: 9, title: 'Buy eco food', ecoAction: 'food', isDisabled: false, alt: 'trash image', src: ecoFoodUrl }
     ])
 
     const toggleTodo = (id) => {
@@ -74,24 +75,40 @@ export const Tiles = () => {
         }))
     }
 
-    const sendDataActivity = (currentDate, activity, progressLevel) => {
-        const data = { ...activity, count: progressLevel }
+    const sendDataActivity = () => {
         fetch(`${DATABASE_URL}/users/id1/${currentDate}.json`, {
             method: 'PUT',
-            body: JSON.stringify(data)
+            body: JSON.stringify(dateActivity)
         })
     }
 
-    useEffect(() => {
-        sendDataActivity(currentDate, activity, progressLevel)
-        console.log(activity)
-    }, [progressLevel])
+    const loadDataActivity =(DATABASE_URL,currentDate) =>fetch(`${DATABASE_URL}/users/id1/${currentDate}.json`)
+        .then(r => r.json())
+        .then(data => {
+            if (data) {
+                const { date, total, ...rest } = data
+                setActivity(rest)
+                setProgressLevel(total)
+                const formatActivity = Object.entries(rest)
+                formatActivity.map(action => {
+                    if (action[1] === true) {
+                        buttons.map(button => {
+                            if (button.ecoAction === action[0]) {
+                                button.isDisabled = true
+                            }
+                        })
+                    }
+                })
+            } else {
+                buttons.map(button => button.isDisabled = false)
+            }
+        })
 
     const allFunction = (id) => {
         addPoints();
         toggleTodo(id)
     }
-
+    loadDataActivity(DATABASE_URL,currentDate);
     return (
         <>
             < div className='body-tabel'>

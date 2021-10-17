@@ -1,4 +1,4 @@
-export const getCurrentDate = (separator = '-') => {
+export const getCurrentDate = (separator = '_') => {
     let newDate = new Date()
     let date_raw = newDate.getDate();
     let month_raw = newDate.getMonth() + 1;
