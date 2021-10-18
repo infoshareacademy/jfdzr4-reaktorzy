@@ -6,13 +6,6 @@ export const UserActivity = createContext({});
 
 export const loadUserActivityData = () => {
    return fetch(`${DATABASE_URL}/users/id1.json`)
-        .then(r => r.json())
-        .then(data => {
-            if (data) {
-                const formattedData = Object.keys(data).map(key => ({ date: key, ...data[key] }));
-                return (formattedData.slice(-10))
-            }
-        })
 }
 
 export const loadUserActivityCurrentDate = (date) => {
