@@ -11,18 +11,15 @@ import ecoFoodUrl from '../assets/9.ecoFood.png'
 import { useEffect, useState, useContext } from 'react'
 import { getCurrentDate } from '../../controllers/get-date/getDate'
 import { DATABASE_URL } from '../../firebase-config'
+import { loadDateActivity, sendDataActivity } from '../services';
+import { ProgressContex } from '../context/ProgressContex';
 
 export const Tiles = () => {
 
-    const [progressLevel, setProgressLevel] = useState(0)
+    const {setProgressLevel} = useContext(ProgressContex)
     const [activity, setActivity] = useState({})
-    const [dateActivity, setDateActivity] = useState({})
 
     const currentDate = getCurrentDate();
-
-    const addPoints = () => {
-        setProgressLevel(progressLevel + 1)
-    }
 
     const [buttons, setButtons] = useState([
         { id: 1, title: 'Garbage segregation', ecoAction: 'segregation', isDisabled: false, alt: 'trash image', src: trashUrl },
@@ -40,55 +37,29 @@ export const Tiles = () => {
         setButtons(buttons.map(button => {
             if (button.id === id) {
                 button.isDisabled = !button.isDisabled
-                switch (id) {
-                    case 1:
-                        setActivity({ segregation: true, ...activity })
-                        break;
-                    case 2:
-                        setActivity({ bags: true, ...activity })
-                        break;
-                    case 3:
-                        setActivity({ clothes: true, ...activity })
-                        break;
-                    case 4:
-                        setActivity({ transport: true, ...activity })
-                        break;
-                    case 5:
-                        setActivity({ action: true, ...activity })
-                        break;
-                    case 6:
-                        setActivity({ dishes: true, ...activity })
-                        break;
-                    case 7:
-                        setActivity({ home: true, ...activity })
-                        break;
-                    case 8:
-                        setActivity({ plants: true, ...activity })
-                        break;
-                    case 9:
-                        setActivity({ food: true, ...activity })
-                        break;
-                    default:
-                }
+                setActivity({[button.ecoAction] : true, ...activity})
             }
             return button
         }))
     }
 
-    const sendDataActivity = () => {
-        fetch(`${DATABASE_URL}/users/id1/${currentDate}.json`, {
-            method: 'PUT',
-            body: JSON.stringify(dateActivity)
-        })
+    const allFunction = (id) => {
+        toggleTodo(id)
     }
 
-    const loadDataActivity =(DATABASE_URL,currentDate) =>fetch(`${DATABASE_URL}/users/id1/${currentDate}.json`)
+    useEffect(()=>{
+        const activityLevel = Object.keys(activity).length
+        setProgressLevel(activityLevel)
+        const dateActivity = {...activity, total:activityLevel}
+        sendDataActivity(DATABASE_URL,currentDate,dateActivity)
+    },[activity])
+
+    useEffect(()=>{
+        loadDateActivity(DATABASE_URL,currentDate)
         .then(r => r.json())
         .then(data => {
             if (data) {
-                const { date, total, ...rest } = data
-                setActivity(rest)
-                setProgressLevel(total)
+                const { total, ...rest } = data
                 const formatActivity = Object.entries(rest)
                 formatActivity.map(action => {
                     if (action[1] === true) {
@@ -99,16 +70,14 @@ export const Tiles = () => {
                         })
                     }
                 })
+                setActivity(rest)
             } else {
-                buttons.map(button => button.isDisabled = false)
+               buttons.map(button => button.isDisabled = false)
             }
         })
+    },[])
 
-    const allFunction = (id) => {
-        addPoints();
-        toggleTodo(id)
-    }
-    loadDataActivity(DATABASE_URL,currentDate);
+
     return (
         <>
             < div className='body-tabel'>
