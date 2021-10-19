@@ -20,6 +20,11 @@ export const loadUserActivityCurrentDate = (date) => {
         })
 }
 
+export const totalCount =(row) => {
+    const progressLevel = Object.values(row).filter((value) => typeof value === "boolean" && value === true)
+    return progressLevel.length
+}
+
 export const UserActivityProvider = ({ children }) => {
 
     const [userActivityDate, setUserActivityDate] = useState({})

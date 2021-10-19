@@ -8,36 +8,9 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { green } from "@mui/material/colors";
 import Checkbox from "@mui/material/Checkbox";
-import {
-  loadUserActivityData,
-  UserActivity,
-} from "../../controllers/user-activity/index";
+import {loadUserActivityData, totalCount} from "../../controllers/user-activity/index";
 
 import { DATABASE_URL } from "../../firebase-config";
-
-/* function createData(date, segregation, bags, clothes, transport, action, dishes, home, plants, food) {
-  return { date, segregation, bags, clothes, transport, action, dishes, home, plants, food };
-}
-const setTotal = () => {
-
-}
-
-let allRows = [
-  createData('07-10-2021', false, true, true, false, false, false, false, false, false),
-  createData('08-10-2021', false, true, true, false, true, false, false, true, false),
-  createData('09-10-2021', false, true, true, false, false, true, false, false, false),
-  createData('10-10-2021', false, true, true, false, false, false, false, false, false),
-  createData('11-10-2021', false, true, true, false, false, false, false, false, false),
-  createData('12-10-2021', false, true, true, false, true, false, false, false, false),
-  createData('13-10-2021', false, true, true, false, false, false, false, true, false),
-]; */
-
-// const CheckboxTable = () => {
-//     return (
-//         <Checkbox checked={} color="success" />
-//     )
-
-// }
 
 export const History = () => {
 
@@ -55,23 +28,11 @@ useEffect(()=>{
       }
   })
 },[])
-/*   useEffect(() => {
-    setRows(calculateTotal(rows));
-  }, [rows]); */
 
-  const totalCount =(row) => {
-    const progressLevel = Object.values(row).filter(
-    (value) => typeof value === "boolean" && value === true
-  )
-  return progressLevel.length
-};
-
-  const updateActivityInDatabase = (rows, date) => {
+  const updateActivityInDatabase = (rows,index) => {
     let activityAndTotal = {};
-    rows.map((row) => {
-      const { date, ...rest } = row;
-      activityAndTotal = {...rest};
-    });
+    const { date, ...rest } = rows[index];
+    activityAndTotal = {...rest};
     fetch(`${DATABASE_URL}/users/id1/${date}.json`, {
       method: "PUT",
       body: JSON.stringify(activityAndTotal),
@@ -82,8 +43,7 @@ useEffect(()=>{
     const rowsCopy = [...rows];
     rowsCopy[index][name] = event.target.checked;
     setRows(calculateTotal(rowsCopy));
-    dateClicked = rows[index].date;
-    updateActivityInDatabase(calculateTotal(rowsCopy), dateClicked);
+    updateActivityInDatabase(calculateTotal(rowsCopy),index);
   };
 
   const calculateTotal = (rows) => {

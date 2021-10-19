@@ -13,6 +13,7 @@ import { getCurrentDate } from '../../controllers/get-date/getDate'
 import { DATABASE_URL } from '../../firebase-config'
 import { loadDateActivity, sendDataActivity } from '../services';
 import { ProgressContex } from '../context/ProgressContex';
+import { totalCount } from '../../controllers/user-activity';
 
 export const Tiles = () => {
 
@@ -48,7 +49,7 @@ export const Tiles = () => {
     }
 
     useEffect(()=>{
-        const activityLevel = Object.keys(activity).length
+        const activityLevel = totalCount(activity)
         setProgressLevel(activityLevel)
         const dateActivity = {...activity, total:activityLevel}
         sendDataActivity(DATABASE_URL,currentDate,dateActivity)
