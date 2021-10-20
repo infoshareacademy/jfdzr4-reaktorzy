@@ -8,21 +8,17 @@ import bottleUrl from "../assets/5.bottle.png";
 import homeUrl from "../assets/6.home.png";
 import plantUrl from "../assets/7.plant.png";
 import ecoFoodUrl from "../assets/9.ecoFood.png";
-import CircularProgress from "@mui/material/CircularProgress";
-import Box from "@mui/material/Box";
 
 import { useEffect, useState, useContext } from "react";
-import { getCurrentDate } from "../../controllers/get-date/getDate";
 import { DATABASE_URL } from "../../firebase-config";
-import { loadDateActivity, sendDataActivity } from "../../services";
+
+import { getCurrentDate } from "../../controllers/get-date/getDate";
 import { ProgressContex } from "../context/ProgressContex";
-import { totalCount } from "../../controllers/user-activity";
-import { display, width } from "@mui/system";
+import { loadDateActivity, sendDataActivity, totalCount } from "../../services";
 
 export const Tiles = () => {
   const { setProgressLevel } = useContext(ProgressContex);
   const [activity, setActivity] = useState({});
-
   const currentDate = getCurrentDate();
 
   const [buttons, setButtons] = useState([
@@ -105,7 +101,7 @@ export const Tiles = () => {
       buttons.map((button) => {
         if (button.id === id) {
           button.isDisabled = !button.isDisabled;
-          setActivity({ [button.ecoAction]: true, ...activity });
+          setActivity({ ...activity, [button.ecoAction]: true });
         }
         return button;
       })
@@ -140,6 +136,7 @@ export const Tiles = () => {
   }, []);
 
   useEffect(() => {
+    console.log(activity);
     const activityLevel = totalCount(activity);
     setProgressLevel(activityLevel);
     const dateActivity = { ...activity, total: activityLevel };

@@ -8,31 +8,33 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { green } from "@mui/material/colors";
 import Checkbox from "@mui/material/Checkbox";
-import {loadUserActivityData, totalCount} from "../../controllers/user-activity/index";
 
 import { DATABASE_URL } from "../../firebase-config";
+import { loadUserActivityData, totalCount } from "../../services";
 
 export const History = () => {
-
   const [rows, setRows] = useState([]);
 
   let dateClicked = "";
 
-useEffect(()=>{
-  loadUserActivityData()
-  .then(r => r.json())
-  .then(data => {
-      if (data) {
-          const formattedData = Object.keys(data).map(key => ({ date: key, ...data[key] }));
-          setRows((formattedData).slice(-10))
-      }
-  })
-},[])
+  useEffect(() => {
+    loadUserActivityData()
+      .then((r) => r.json())
+      .then((data) => {
+        if (data) {
+          const formattedData = Object.keys(data).map((key) => ({
+            date: key,
+            ...data[key],
+          }));
+          setRows(formattedData.slice(-10));
+        }
+      });
+  }, []);
 
-  const updateActivityInDatabase = (rows,index) => {
+  const updateActivityInDatabase = (rows, index) => {
     let activityAndTotal = {};
     const { date, ...rest } = rows[index];
-    activityAndTotal = {...rest};
+    activityAndTotal = { ...rest };
     fetch(`${DATABASE_URL}/users/id1/${date}.json`, {
       method: "PUT",
       body: JSON.stringify(activityAndTotal),
@@ -43,12 +45,12 @@ useEffect(()=>{
     const rowsCopy = [...rows];
     rowsCopy[index][name] = event.target.checked;
     setRows(calculateTotal(rowsCopy));
-    updateActivityInDatabase(calculateTotal(rowsCopy),index);
+    updateActivityInDatabase(calculateTotal(rowsCopy), index);
   };
 
   const calculateTotal = (rows) => {
     return rows.map((row) => {
-      const total = totalCount(row)
+      const total = totalCount(row);
       return { ...row, total };
     });
   };

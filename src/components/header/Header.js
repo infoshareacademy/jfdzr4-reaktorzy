@@ -2,7 +2,6 @@ import React, { useState, useContext } from "react";
 import "./Header.scss";
 import Logo from "./logo-eco-friendly.svg";
 import { Link } from "react-router-dom";
-import { UserActivity } from "../../controllers/user-activity";
 import { getAuth, signOut } from "firebase/auth";
 // import Avatar from './Avatar-icons-user.svg';
 
@@ -20,6 +19,7 @@ import Logout from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
 
 import { styled } from "@mui/material/styles";
+import { UserContext } from "../../controllers/user-context";
 
 const ColorButton = styled(Button)(({ theme }) => ({
   backgroundColor: "rgb(24, 140, 24)",
@@ -29,7 +29,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 export function Header() {
-  const { isLoggedIn, setIsLoggedIn, userName } = useContext(UserActivity);
+  const { isLoggedIn, userName } = useContext(UserContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -56,9 +56,9 @@ export function Header() {
         </Link>
       </div>
       <div className="header__welcome">Eco Friendly App</div>
-      
+
       {!isLoggedIn && (
-        <div className={'header__login-signup-buttons'}>
+        <div className={"header__login-signup-buttons"}>
           <Link to="/sign-up" className={"nav__button header__button-signup"}>
             <ColorButton variant="contained">Sign up</ColorButton>
           </Link>
