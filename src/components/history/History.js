@@ -11,14 +11,17 @@ import Checkbox from "@mui/material/Checkbox";
 
 import { DATABASE_URL } from "../../firebase-config";
 import { loadUserActivityData, totalCount } from "../../services";
+import { UserContext } from "../../controllers/user-context";
 
 export const History = () => {
   const [rows, setRows] = useState([]);
+  const { isLoggedIn } = useContext(UserContext);
+  const userId = isLoggedIn.uid;
 
   let dateClicked = "";
 
   useEffect(() => {
-    loadUserActivityData()
+    loadUserActivityData(userId)
       .then((r) => r.json())
       .then((data) => {
         if (data) {
@@ -31,11 +34,11 @@ export const History = () => {
       });
   }, []);
 
-  const updateActivityInDatabase = (rows, index) => {
+  const updateActivityInDatabase = (rows, index, userId) => {
     let activityAndTotal = {};
     const { date, ...rest } = rows[index];
     activityAndTotal = { ...rest };
-    fetch(`${DATABASE_URL}/users/id1/${date}.json`, {
+    fetch(`${DATABASE_URL}/users/${userId}/${date}.json`, {
       method: "PUT",
       body: JSON.stringify(activityAndTotal),
     });
@@ -45,7 +48,7 @@ export const History = () => {
     const rowsCopy = [...rows];
     rowsCopy[index][name] = event.target.checked;
     setRows(calculateTotal(rowsCopy));
-    updateActivityInDatabase(calculateTotal(rowsCopy), index);
+    updateActivityInDatabase(calculateTotal(rowsCopy), index, userId);
   };
 
   const calculateTotal = (rows) => {

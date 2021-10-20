@@ -1,22 +1,27 @@
 import { DATABASE_URL } from "./firebase-config";
 
-export const loadDateActivity = (DATABASE_URL, currentDate) => {
-  return fetch(`${DATABASE_URL}/users/id1/${currentDate}.json`);
+export const loadDateActivity = (DATABASE_URL, currentDate, userId) => {
+  return fetch(`${DATABASE_URL}/users/${userId}/${currentDate}.json`);
 };
 
-export const sendDataActivity = (DATABASE_URL, currentDate, dateActivity) => {
-  return fetch(`${DATABASE_URL}/users/id1/${currentDate}.json`, {
+export const sendDataActivity = (
+  DATABASE_URL,
+  currentDate,
+  dateActivity,
+  userId
+) => {
+  return fetch(`${DATABASE_URL}/users/${userId}/${currentDate}.json`, {
     method: "PUT",
     body: JSON.stringify(dateActivity),
   });
 };
 
-export const loadUserActivityData = () => {
-  return fetch(`${DATABASE_URL}/users/id1.json`);
+export const loadUserActivityData = (userId) => {
+  return fetch(`${DATABASE_URL}/users/${userId}.json`);
 };
 
-export const loadUserActivityCurrentDate = (date) => {
-  return fetch(`${DATABASE_URL}/users/id1/${date}.json`)
+export const loadUserActivityCurrentDate = (date, userId) => {
+  return fetch(`${DATABASE_URL}/users/${userId}/${date}.json`)
     .then((r) => r.json())
     .then((data) => {
       if (data) {

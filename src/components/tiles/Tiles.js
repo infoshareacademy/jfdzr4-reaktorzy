@@ -14,10 +14,13 @@ import { DATABASE_URL } from "../../firebase-config";
 
 import { getCurrentDate } from "../../controllers/get-date/getDate";
 import { ProgressContex } from "../context/ProgressContex";
+import { UserContext } from "../../controllers/user-context";
 import { loadDateActivity, sendDataActivity, totalCount } from "../../services";
 
 export const Tiles = () => {
   const { setProgressLevel } = useContext(ProgressContex);
+  const { isLoggedIn } = useContext(UserContext);
+  const userId = isLoggedIn.uid;
   const [activity, setActivity] = useState({});
   const currentDate = getCurrentDate();
 
@@ -113,7 +116,7 @@ export const Tiles = () => {
   };
 
   useEffect(() => {
-    loadDateActivity(DATABASE_URL, currentDate)
+    loadDateActivity(DATABASE_URL, currentDate, userId)
       .then((r) => r.json())
       .then((data) => {
         if (data) {
@@ -140,7 +143,7 @@ export const Tiles = () => {
     const activityLevel = totalCount(activity);
     setProgressLevel(activityLevel);
     const dateActivity = { ...activity, total: activityLevel };
-    sendDataActivity(DATABASE_URL, currentDate, dateActivity);
+    sendDataActivity(DATABASE_URL, currentDate, dateActivity, userId);
   }, [activity]);
 
   return (
