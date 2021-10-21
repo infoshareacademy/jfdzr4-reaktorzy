@@ -4,22 +4,18 @@ import { UserActivityProvider } from "./controllers/user-context";
 import { Header } from "./components/header/Header";
 import { Content } from "./components/content/index";
 // import {ThemeProvider} from "./App.styled";
-import { UserActivityProvider } from './controllers/user-activity/index'
-import { Header } from "./components/header/Header"
-import { Content } from './components/content/index'
-import {ThemeProvider} from "./App.styled";
+import { ThemeProvider } from "./App.styled";
 
 function App() {
   return (
-
-     <ThemeProvider>
+    <ThemeProvider>
       <ProgressContexProvider>
         <UserActivityProvider>
           <Header />
           <Content />
         </UserActivityProvider>
       </ProgressContexProvider>
-     </ThemeProvider>
+    </ThemeProvider>
   );
 }
 
