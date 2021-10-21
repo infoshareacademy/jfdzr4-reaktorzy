@@ -1,5 +1,11 @@
 import { useContext } from "react";
 import { Wrapper } from "../wrapper/index";
+import { getCurrentDate } from "../../controllers/get-date/getDate";
+import { UserContext } from "../../controllers/user-context";
+
+export const Home = () => {
+  const { isLoggedIn } = useContext(UserContext);
+
 import { ProgressBar } from "../ProgressBar/Index";
 import { Tiles } from "../tiles/Tiles";
 import Typography from "@mui/material/Typography";
@@ -12,6 +18,7 @@ import './style.scss';
 export const Home = () => {
   const { userActivity, setUserActivity, isLoggedIn } =
     useContext(UserActivity);
+
 
   return (
     <Wrapper>
