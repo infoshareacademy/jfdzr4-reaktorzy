@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { DATABASE_URL } from "../../../../firebase-config";
 import {LoadingEvents} from '../../loading'
 import logo5 from '../../../assets/images.png'
-import { EcoEventRow } from "../../row";
+
 
 export const EventDetails = () =>{
   
