@@ -16,6 +16,7 @@ import { getCurrentDate } from "../../controllers/get-date/getDate";
 import { ProgressContex } from "../context/ProgressContex";
 import { UserContext } from "../../controllers/user-context";
 import { loadDateActivity, sendDataActivity, totalCount } from "../../services";
+import { ActivityChart } from "../activityChart";
 
 export const Tiles = () => {
   const { setProgressLevel } = useContext(ProgressContex);
@@ -139,7 +140,6 @@ export const Tiles = () => {
   }, []);
 
   useEffect(() => {
-    console.log(activity);
     const activityLevel = totalCount(activity);
     setProgressLevel(activityLevel);
     const dateActivity = { ...activity, total: activityLevel };
@@ -193,6 +193,7 @@ export const Tiles = () => {
           )}
         </div>
       </div>
+      <ActivityChart />
     </>
   );
 };
