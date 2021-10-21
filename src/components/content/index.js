@@ -4,6 +4,7 @@ import { ContentStyle } from './styled';
 import { Home } from '../home/index';
 import { History } from '../history/History';
 import { EcoActions } from '../ecoActions/EcoActions';
+import { EventDetails } from '../ecoActions/addForm/eventDetails';
 
 
 export const Content = () => (
@@ -16,8 +17,11 @@ export const Content = () => (
         <Route path="/history">
             <History/>
         </Route>
-        <Route path="/eco-actions">
+        <Route exact path="/eco-actions">
             <EcoActions/>
+        </Route>
+        <Route path='/eco-actions/:id'>
+            <EventDetails/>
         </Route>
     </Switch>
 

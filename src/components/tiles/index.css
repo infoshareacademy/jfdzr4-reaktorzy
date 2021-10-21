@@ -8,7 +8,7 @@
     padding: 10px;
     width: 15vmin;
     height: 15vmin;
-    border-radius: 50%;
+    /* border-radius: 50%; */
 }
 
 .tiles-img{
@@ -33,7 +33,7 @@
     text-align: center;
     content: attr(data-title);
     position: absolute; 
-    margin: 0 auto;
+    left: 0; right: 0; bottom: 0; 
     background: rgba(0, 128, 0, 0.65);
     color: white; 
     padding: 0.2em; 
@@ -41,7 +41,6 @@
     pointer-events: none;
     opacity: 0; 
     transition: 1s;
-    border-radius: 12px;
 }
 
 
@@ -64,20 +63,12 @@
     box-shadow: -1px 1px 5px 5px rgba(0, 128, 0, 0.24);
 }
 .tiles-shadow{
-    /* display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    background: none;
-    margin: 0 auto;
-    padding: 10px;
-    width: 15vmin;
-    height: 15vmin;
-
-    border-radius: 50%; */
-
     text-decoration: none;
     border: none;
     outline: none;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.ecoEvent:hover{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }

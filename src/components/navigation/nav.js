@@ -10,8 +10,8 @@ export const Navigation = () => {
         <button  className="btn" color="inherit"> 
             <Link className={'navigation-link'} to="/history">History</Link>
         </button>
-        <button className="btn" color="inherit" component={Link} to="/eco akcje">
-            <Link className={'navigation-link'} to="/eco-actions">Eco Actions</Link>
+        <button className="btn" color="inherit">
+            <Link className={'navigation-link'} to="/eco-actions">Green events</Link>
         </button>
     </div>
     );
