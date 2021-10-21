@@ -1,0 +1,6 @@
+.content__wrapper {
+    background-image: url('./background-content/wellness-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: calc(100vh - 105px);
+}

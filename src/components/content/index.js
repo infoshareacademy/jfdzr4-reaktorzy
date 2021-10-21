@@ -6,24 +6,33 @@ import { History } from '../history/History';
 import { EcoActions } from '../ecoActions/EcoActions';
 import { EventDetails } from '../ecoActions/addForm/eventDetails';
 
+import { SignIn, SignUp } from '../sign';
+import './style.css'
 
 export const Content = () => (
-    <Switch>
-         <Route path='/' exact>
-            <ContentStyle>
-                <Home />
-            </ContentStyle>
-        </Route>
-        <Route path="/history">
-            <History/>
-        </Route>
-        <Route exact path="/eco-actions">
-            <EcoActions/>
-        </Route>
-        <Route path='/eco-actions/:id'>
-            <EventDetails/>
-        </Route>
-    </Switch>
-
+    <div className={'content__wrapper'}>
+        <Switch>
+            <Route path='/' exact>
+                <ContentStyle>
+                    <Home />
+                </ContentStyle>
+            </Route>
+            <Route path="/history">
+                <History/>
+            </Route>
+            <Route path="/eco-actions">
+                <EcoActions/>
+            </Route>
+            <Route path='/eco-actions/:id'>
+                <EventDetails/>
+            </Route>
+            <Route path="/sign-in">
+                <SignIn/>
+            </Route>
+            <Route path="/sign-up">
+                <SignUp/>
+            </Route>
+        </Switch>
+    </div>
 )
 
