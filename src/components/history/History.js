@@ -13,6 +13,10 @@ import { DATABASE_URL } from "../../firebase-config";
 import { loadUserActivityData, totalCount } from "../../services";
 import { UserContext } from "../../controllers/user-context";
 
+
+import './style.scss'
+
+
 export const History = () => {
   const [rows, setRows] = useState([]);
   const { isLoggedIn } = useContext(UserContext);
@@ -193,3 +197,4 @@ export const History = () => {
     </TableContainer>
   );
 };
+
