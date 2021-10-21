@@ -8,7 +8,6 @@ import {firebaseConfig} from "./firebase-config";
 
 initializeApp(firebaseConfig);
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Router>

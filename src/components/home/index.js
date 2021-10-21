@@ -1,3 +1,4 @@
+
 import { useContext } from "react";
 import { Wrapper } from "../wrapper/index";
 import { getCurrentDate } from "../../controllers/get-date/getDate";
@@ -11,8 +12,10 @@ import { Link } from "react-router-dom";
 import { green } from "@mui/material/colors";
 import "./style.scss";
 
+
 export const Home = () => {
   const { isLoggedIn } = useContext(UserContext);
+
 
   return (
     <Wrapper>

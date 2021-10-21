@@ -17,12 +17,14 @@ import { ProgressContex } from "../context/ProgressContex";
 import { UserContext } from "../../controllers/user-context";
 import { loadDateActivity, sendDataActivity, totalCount } from "../../services";
 
+
 export const Tiles = () => {
   const { setProgressLevel } = useContext(ProgressContex);
   const { isLoggedIn } = useContext(UserContext);
   const userId = isLoggedIn.uid;
   const [activity, setActivity] = useState({});
   const currentDate = getCurrentDate();
+
 
   const [buttons, setButtons] = useState([
     {

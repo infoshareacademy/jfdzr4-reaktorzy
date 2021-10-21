@@ -4,6 +4,8 @@ import { ContentStyle } from './styled';
 import { Home } from '../home/index';
 import { History } from '../history/History';
 import { EcoActions } from '../ecoActions/EcoActions';
+import { EventDetails } from '../ecoActions/addForm/eventDetails';
+
 import { SignIn, SignUp } from '../sign';
 import './style.css'
 
@@ -21,6 +23,9 @@ export const Content = () => (
             <Route path="/eco-actions">
                 <EcoActions/>
             </Route>
+            <Route path='/eco-actions/:id'>
+                <EventDetails/>
+            </Route>
             <Route path="/sign-in">
                 <SignIn/>
             </Route>
@@ -29,6 +34,5 @@ export const Content = () => (
             </Route>
         </Switch>
     </div>
-
 )
 

@@ -8,6 +8,7 @@ import { ThemeProvider } from "./App.styled";
 
 function App() {
   return (
+
     <ThemeProvider>
       <ProgressContexProvider>
         <UserActivityProvider>
