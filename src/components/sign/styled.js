@@ -6,8 +6,8 @@ export const ActionsContainer = styled.div`
   align-items: flex-end;
   justify-content: space-evenly;
   min-height: 100px;
-  }
-`;
+`
+
 export const WrapperSignInAndLogIn = styled.div`
 max-width: 40%;
 margin: 0 auto;
