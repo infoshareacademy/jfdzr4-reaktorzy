@@ -3,22 +3,16 @@ import { Wrapper } from "../wrapper/index";
 import { getCurrentDate } from "../../controllers/get-date/getDate";
 import { UserContext } from "../../controllers/user-context";
 
-export const Home = () => {
-  const { isLoggedIn } = useContext(UserContext);
-
-import { ProgressBar } from "../ProgressBar/Index";
+import { ProgressBar } from "../progressBar/Index";
 import { Tiles } from "../tiles/Tiles";
 import Typography from "@mui/material/Typography";
-import { UserActivity } from "../../controllers/user-activity/index";
-import { getCurrentDate } from "../../controllers/get-date/getDate";
+
 import { Link } from "react-router-dom";
 import { green } from "@mui/material/colors";
-import './style.scss';
+import "./style.scss";
 
 export const Home = () => {
-  const { userActivity, setUserActivity, isLoggedIn } =
-    useContext(UserActivity);
-
+  const { isLoggedIn } = useContext(UserContext);
 
   return (
     <Wrapper>
@@ -37,7 +31,7 @@ export const Home = () => {
             Please sign in to see the content!
           </Link>
           <div className="tree-animation">
-            <img src={require('./tree animation/tree.gif')} alt="loading..." />
+            <img src={require("./tree animation/tree.gif")} alt="loading..." />
           </div>
         </div>
       )}
