@@ -21,9 +21,9 @@ export const Tiles = () =>{
         {id: 2, title: 'Do not use plastic bags', isDisabled: false, alt: 'trash image', src: ecoShoppingUrl},
         {id: 3, title: 'Use eco clothes', isDisabled: false, alt: 'trash image', src: clothesUrl},
         {id: 4, title: 'Use public transport', isDisabled: false, alt: 'trash image', src: busUrl},
-        {id: 5, title: 'Garbage You eco action', isDisabled: false, alt: 'trash image', src: yourEcoActionUrl},
-        {id: 6, title: 'Use reusable dishes', isDisabled: false, alt: 'trash image', src: bottleUrl},
-        {id: 7, title: 'Eco dom', isDisabled: false, alt: 'trash image', src: homeUrl},
+        {id: 5, title: 'You eco action', isDisabled: false, alt: 'trash image', src: yourEcoActionUrl},
+        {id: 6, title: 'Reusable dishes', isDisabled: false, alt: 'trash image', src: bottleUrl},
+        {id: 7, title: 'Use Eco dom', isDisabled: false, alt: 'trash image', src: homeUrl},
         {id: 8, title: 'To plant plants', isDisabled: false, alt: 'trash image', src: plantUrl},
         {id: 9, title: 'Buy eco food', isDisabled: false, alt: 'trash image', src: ecoFoodUrl}
     ])
@@ -45,7 +45,7 @@ export const Tiles = () =>{
          addPoints();
          toggleTodo(id)
      }
-
+     
     return(
         <>
         < div className='body-tabel'>
@@ -55,14 +55,10 @@ export const Tiles = () =>{
                         button.isDisabled
                         ?<button className='tiles tiles-shadow' key={button.id} onClick={()=> allFunction(button.id)} disabled={button.isDisabled}>
                             {<img className='tiles-img' alt={button.alt} src={button.src} />}
-                        </button>
-                        :
-                            <button className="tiles tiles-btn " data-title={button.title} key={button.id} onClick={()=> allFunction(button.id)} disabled={button.isDisabled}>
+                         </button>
+                        :<button className="tiles tiles-btn " data-title={button.title} key={button.id} onClick={()=> allFunction(button.id)} disabled={button.isDisabled}>
                             {<img className='tiles-img' alt={button.alt} src={button.src} />}
-                        </button>
-                        
-                        
-                        
+                         </button>   
                     )
                 } 
             </div>
