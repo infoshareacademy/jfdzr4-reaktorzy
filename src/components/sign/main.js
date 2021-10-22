@@ -75,7 +75,7 @@ export const Sign = ({isSignUp}) => {
                 <Button
                     type="submit"
                     variant="contained"
-                    color="primary"
+                 
                 >
                     {isSignUp ? 'Sign up' : 'Sign in'}
                 </Button>

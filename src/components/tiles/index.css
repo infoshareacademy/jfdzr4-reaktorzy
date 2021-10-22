@@ -3,14 +3,17 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    width: 115px;
     background: none;
     margin: 0 auto;
+    padding: 10px;
+    width: 15vmin;
+    height: 15vmin;
+    /* border-radius: 50%; */
 }
 
 .tiles-img{
-    width: 110px;
-    height: 110px;
+    width: 80%;
+    height: 80%;
     display: inline-block; 
     position: relative;
 }
@@ -26,6 +29,7 @@
     position: relative;
 }
 [data-title]:after{
+
     text-align: center;
     content: attr(data-title);
     position: absolute; 
@@ -37,7 +41,6 @@
     pointer-events: none;
     opacity: 0; 
     transition: 1s;
-    border-radius: 0px 0px 5px 5px;
 }
 
 
@@ -48,8 +51,7 @@
 .tiles-btn {
     text-decoration: none;
     border: none;
-    font-size: 20px;
-    border-radius: 5px;
+    font-size: 16px;
     outline: none;
     transition: 0.5s all;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -63,8 +65,10 @@
 .tiles-shadow{
     text-decoration: none;
     border: none;
-    font-size: 20px;
-    border-radius: 5px;
     outline: none;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}
+
+.ecoEvent:hover{
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px, rgba(17, 17, 26, 0.1) 0px 24px 80px;
 }

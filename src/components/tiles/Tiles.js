@@ -18,12 +18,14 @@ import { UserContext } from "../../controllers/user-context";
 import { loadDateActivity, sendDataActivity, totalCount } from "../../services";
 import { ActivityChart } from "../activityChart";
 
+
 export const Tiles = () => {
   const { setProgressLevel } = useContext(ProgressContex);
   const { isLoggedIn } = useContext(UserContext);
   const userId = isLoggedIn.uid;
   const [activity, setActivity] = useState({});
   const currentDate = getCurrentDate();
+
 
   const [buttons, setButtons] = useState([
     {

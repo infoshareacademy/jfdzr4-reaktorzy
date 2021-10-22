@@ -1,14 +1,21 @@
+
 import { useContext } from "react";
 import { Wrapper } from "../wrapper/index";
+import { getCurrentDate } from "../../controllers/get-date/getDate";
+import { UserContext } from "../../controllers/user-context";
+
 import { ProgressBar } from "../progressBar/Index";
 import { Tiles } from "../tiles/Tiles";
 import Typography from "@mui/material/Typography";
-import { getCurrentDate } from "../../controllers/get-date/getDate";
+
 import { Link } from "react-router-dom";
-import { UserContext } from "../../controllers/user-context";
+import { green } from "@mui/material/colors";
+import "./style.scss";
+
 
 export const Home = () => {
   const { isLoggedIn } = useContext(UserContext);
+
 
   return (
     <Wrapper>
@@ -20,8 +27,15 @@ export const Home = () => {
         </>
       ) : (
         <div>
-          <Typography variant="h4">Hello stranger!</Typography>
-          <Link to="/sign-in">Please sign in to see the content!</Link>
+          <Typography variant="h4">
+            Hello stranger! Save the future Earth with us
+          </Typography>
+          <Link to="/sign-in" style={{ color: "#188c18" }}>
+            Please sign in to see the content!
+          </Link>
+          <div className="tree-animation">
+            <img src={require("./tree animation/tree.gif")} alt="loading..." />
+          </div>
         </div>
       )}
     </Wrapper>
