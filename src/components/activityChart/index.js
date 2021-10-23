@@ -50,7 +50,9 @@ export const ActivityChart = () => {
     <div
       style={{
         display: "flex",
-        flexFlow: "column wrap",
+        flexFlow: "row-reverse wrap-reverse",
+        flexDirection: "column-reverse",
+        /* alignItems: "end", */
         height: "98px",
         width: "742px",
       }}
