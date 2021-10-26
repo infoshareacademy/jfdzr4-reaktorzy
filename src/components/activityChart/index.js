@@ -6,7 +6,7 @@ import { loadUserActivityData } from "../../services";
 
 export const ActivityChart = () => {
   const [userDateProgress, setUserDateProgress] = useState([]);
-  const [activityChart, setActivityChart] = useState([]);
+
   const { isLoggedIn } = useContext(UserContext);
   const userId = isLoggedIn.uid;
 
@@ -18,7 +18,8 @@ export const ActivityChart = () => {
   chartDay.getDate();
   for (let day = 0; day < 365; day++) {
     if (day < 7 - dayOfWeek) {
-      chartDay.setDate(chartDay.getDate() + (7 - dayOfWeek));
+      chartDay = new Date();
+      chartDay.setDate(chartDay.getDate() + (7 - dayOfWeek - day));
     } else if (day === 7 - dayOfWeek) {
       chartDay = new Date();
     } else {
@@ -29,21 +30,21 @@ export const ActivityChart = () => {
     initialActivityChart.push({ date: formatedDate, progress: 0 });
   }
 
+  const [activityChart, setActivityChart] = useState(initialActivityChart);
+
   useEffect(() => {
     const updateChart = activityChart.map((day) => {
-      const newProgress = userDateProgress.map((dayUser) => {
+      userDateProgress.map((dayUser) => {
         if (dayUser.date === day.date) {
-          return dayUser.progress;
-        } else return 0;
+          day.progress = dayUser.progress;
+        }
       });
-      day.progress = newProgress[0];
       return day;
     });
     setActivityChart(updateChart);
   }, [userDateProgress]);
 
   useEffect(() => {
-    setActivityChart(initialActivityChart);
     loadUserActivityData(userId)
       .then((r) => r.json())
       .then((data) => {
