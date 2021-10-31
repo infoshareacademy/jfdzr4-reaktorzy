@@ -3,4 +3,9 @@
     background-repeat: no-repeat;
     background-size: cover;
     min-height: calc(100vh - 105px);
+    min-width: 350px;
+}
+
+.content__wrapper--no-background {
+    background-image: none;
 }

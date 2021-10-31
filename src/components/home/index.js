@@ -27,15 +27,17 @@ export const Home = () => {
         </>
       ) : (
         <div>
-          <Typography variant="h4">
-            Hello stranger! Save the future Earth with us
+          <Typography variant="h2" align="center">
+          <p className="home_text_hello_stranger">Hello stranger!</p>
           </Typography>
-          <Link to="/sign-in" style={{ color: "#188c18" }}>
-            Please sign in to see the content!
+          <Typography variant="h3" align="center">
+          <p className="home_text_save_the_future_Earth">Save the future Earth with us!</p>
+          </Typography>
+         
+          <div className="tree-animation"/>
+          <Link to="/sign-in" style={{ textDecoration: 'none' }}>
+            <h2 className="sign-in-to-see-the-content">Please sign in to see the content!</h2>
           </Link>
-          <div className="tree-animation">
-            <img src={require("./tree animation/tree.gif")} alt="loading..." />
-          </div>
         </div>
       )}
     </Wrapper>
