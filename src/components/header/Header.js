@@ -16,11 +16,14 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import Button from "@mui/material/Button";
+import Drawer from '@mui/material/Drawer';
+import MenuIcon from '@mui/icons-material/Menu';
 
 import { styled } from "@mui/material/styles";
 import { UserContext } from "../../controllers/user-context";
+import { HeaderDrawerContent } from "./HeaderDrawerContent";
 
-const ColorButton = styled(Button)(({ theme }) => ({
+export const ColorButton = styled(Button)(({ theme }) => ({
   backgroundColor: theme.palette.secondary.main,
   color: theme.palette.primary.main,
   "&:hover": {
@@ -33,6 +36,8 @@ export function Header() {
   const { isLoggedIn, userName } = useContext(UserContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isOpen, setIsOpen] = useState(false)
+
   const open = Boolean(anchorEl);
   const firstLetterName = userName.charAt(0).toUpperCase();
 
@@ -57,17 +62,31 @@ export function Header() {
         </Link>
       </div>
       <div className="header__welcome">Eco Friendly App</div>
-
+      <div className={'header-drawer-menu-icon'} onClick={()=>setIsOpen(true)}>
+        <MenuIcon sx={{ fontSize: 30 }}/>
+      </div>
+          <Drawer
+            className='header-drawer-container'
+            anchor={'right'}
+            open={isOpen}
+            onClose={()=> setIsOpen(false)}
+          >
+            <HeaderDrawerContent/> 
+          </Drawer>
       {!isLoggedIn && (
-        <div className={"header__login-signup-buttons"}>
-          <Link to="/sign-up" className={"nav__button header__button-signup"}>
-            <ColorButton variant="contained">Sign up</ColorButton>
-          </Link>
+        <>
+          <div className={"header__login-signup-buttons"}>
+            <Link to="/sign-up" className={"nav__button header__button-signup"}>
+              <ColorButton variant="contained">Sign up</ColorButton>
+            </Link>
 
-          <Link to="/sign-in" className={"nav__button header__button-login"}>
-            <ColorButton variant="contained">Log in</ColorButton>
-          </Link>
-        </div>
+            <Link to="/sign-in" className={"nav__button header__button-login"}>
+              <ColorButton variant="contained">Log in</ColorButton>
+            </Link>
+          </div>
+  
+        </>
+
       )}
 
       {isLoggedIn && (
@@ -85,7 +104,7 @@ export function Header() {
               <ColorButton variant="contained">Green Events</ColorButton>
             </Link>
           </div>
-          <div>
+          <div className={'header__profile'}>
             <Box
               sx={{
                 display: "flex",
