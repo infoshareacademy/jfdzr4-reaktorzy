@@ -16,8 +16,8 @@ export const ProgressBar = () => {
   return (
     <>
       <ProgressBarWrapper>
-        {arrayLeaf.map((Element) => {
-          return <Element key={Element.id} />;
+        {arrayLeaf.map((Element, i) => {
+          return <Element key={i} />;
         })}
       </ProgressBarWrapper>
     </>
