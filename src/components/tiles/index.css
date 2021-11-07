@@ -19,12 +19,6 @@
 }
 
 
-.tiles-container{
-    display: grid;
-    grid-template-columns: auto auto auto;
-    padding: 10px;
-    grid-gap: 15px; 
-}
 .body-tabel{
     margin: 0 auto;
     width: 600px;
