@@ -1,3 +1,4 @@
+
 export const DATABASE_URL = "https://eco-rysio-default-rtdb.europe-west1.firebasedatabase.app";
 
 export const firebaseConfig = {

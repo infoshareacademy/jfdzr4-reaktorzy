@@ -1,9 +1,10 @@
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import './index.css'
 
 export const LoadingEvents =()=> {
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', margin: 'auto'}}>
+    <Box className="loading-events">
       <CircularProgress />
     </Box>
   );

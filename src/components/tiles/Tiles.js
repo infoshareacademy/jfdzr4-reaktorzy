@@ -151,14 +151,7 @@ export const Tiles = () => {
   return (
     <>
       <div className="body-tabel">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "auto auto auto",
-            padding: "10px",
-            gridGap: "15px",
-          }}
-        >
+        <div className='tiles-container'>
           {buttons.map((button) =>
             button.isDisabled ? (
               <button
@@ -168,11 +161,7 @@ export const Tiles = () => {
                 disabled={button.isDisabled}
               >
                 {
-                  <img
-                    className="tiles-img"
-                    alt={button.alt}
-                    src={button.src}
-                  />
+                  <img className="tiles-img"alt={button.alt}src={button.src}/>
                 }
               </button>
             ) : (

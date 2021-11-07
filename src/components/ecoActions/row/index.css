@@ -1,0 +1,22 @@
+.eventRow-conatiner{
+    width: 288px
+}
+
+.eventRow-image{
+    max-height: 160px
+}
+
+.eventRow-title{
+    height: 60px;
+    font-size: 1.17em;
+}
+
+.eventRow-description{
+    height: 80px;
+    overflow: hidden;
+}
+
+.eventRow-button{
+    width: 110px;
+    margin-right: 10px;
+}
