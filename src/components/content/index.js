@@ -10,9 +10,17 @@ import { SignIn, SignUp } from '../sign';
 import './style.css'
 import { Profile } from '../profile/index';
 
-export const Content = () => (
-    <div className={'content__wrapper'}>
-        <Switch>
+import { useLocation } from 'react-router-dom'
+import { useContext } from 'react';
+import { UserContext } from '../../controllers/user-context';
+
+
+export const Content = () => {
+    const location = useLocation();
+    const { isLoggedIn } = useContext(UserContext);
+    return (
+        <div className={`content__wrapper ${location.pathname === '/' && !isLoggedIn ? 'content__wrapper--no-background' : ''}`}>
+            <Switch>
             <Route path='/' exact>
                 <ContentStyle>
                     <Home />
@@ -33,6 +41,8 @@ export const Content = () => (
                 <SignUp/>
             </Route>
         </Switch>
-    </div>
-)
+        </div>
+    )
+}
+
 
