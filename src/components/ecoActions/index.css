@@ -1,0 +1,36 @@
+.green-event-title{
+    display: 'flex';
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    
+}
+
+.green-event-title-content{
+  margin: 0;
+  padding: 15px 0px 15px 15px;
+  display: 'flex';
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+}
+.green-event-container{
+  flex: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+
+}
+.addEvent-button{
+    position: fixed;
+    bottom: 10px;
+    left: 85%
+}
+
+.grid-event-container{
+  display: flex;
+  flex-wrap: wrap;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 15px; 
+  margin: auto;
+}

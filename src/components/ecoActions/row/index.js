@@ -5,50 +5,63 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import {Link} from 'react-router-dom'
 import Button from '@mui/material/Button';
-
 import logo5 from '../../assets/images.png'
-import { useState } from 'react';
 import '../../tiles/index.css'
+import { useState, useContext} from 'react';
+import { SubscribeEventContex } from '../../context/SubscribeContex';
+import {LogInModal} from '../logInModal/index'
+import './index.css'
 
+export const EcoEventRow =({ecoEvent, newFetch}) =>{
+    const {user, isSubscribe, handleStarClick} =useContext(SubscribeEventContex)
 
-
-export const EcoEventRow =({ecoEvent}) =>{
-
-    const [flag, setFlag] = useState(true)
-
-    const handlerFlag = ()=>{
-        setFlag(!flag)
-    }
-
+    const [isOpen, setIsOpen] = useState(false);
+      const handleClickOpen = () => {
+        setIsOpen(true);
+      };
+      const handleClose = () => {
+        setIsOpen(false);
+      };
     return(
         <>
-        
-            <Card sx={{ maxWidth: 345}} className={'ecoEvent'}>
+            <Card className="eventRow-conatiner">
                 <CardMedia
+                    className="eventRow-image"
                     component="img"
-                    height="160"
                     alt="Event image"
-                    src={ecoEvent.url || logo5}
-        
+                    src={ecoEvent.url || logo5} 
                 />
+
                 <CardContent>
-                    
-                    <Typography gutterBottom variant="h5" component="div" sx={{height: 60}} >
+                    <Typography gutterBottom className="eventRow-title" component="div">
                         {ecoEvent.title} 
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{height: 80, overflow: 'hidden'}}>
+                    <Typography variant="body2" color="text.secondary" className="eventRow-description">
                        {ecoEvent.description}
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button variant="contained" 
-                    color={ flag ? 'primary' : 'success'}
-                         size="small" onClick={handlerFlag}>Subscribe</Button>
-                    <Button size="small" onClick={()=>console.log('learn more')}>
-                    <Link to={`/eco-actions/${ecoEvent.id} `} >Learn More</Link>
-                        </Button>
+                    {!!user ? (<div>
+                        {
+                            isSubscribe(ecoEvent.id) 
+                            ? <Button variant="contained" color={'success'} size="small" className="eventRow-button" onClick={()=>handleStarClick(ecoEvent.id)}>
+                                Unsubscribes
+                              </Button> 
+                            : <Button variant="contained" color={'primary'} size="small" className="eventRow-button" onClick={()=>handleStarClick(ecoEvent.id)}>
+                                Subscribe
+                              </Button> 
+                            } 
+                            </div>
+                    )   :   <Button variant="contained" color={'success'} size="small" className="eventRow-button" onClick={handleClickOpen}>
+                                Subscribe
+                            </Button>
+                    }
+                    <Button size="small" className="eventRow-button" component={Link} to={`/eco-actions/${ecoEvent.id}`}>
+                        Learn More
+                    </Button>
                 </CardActions>
             </Card>
+            <LogInModal isOpen={isOpen} handleClose={handleClose}/>
             </>
     )
 }
