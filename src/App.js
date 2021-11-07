@@ -1,5 +1,4 @@
 import { ProgressContexProvider } from "./components/context/ProgressContex";
-
 import { UserActivityProvider } from "./controllers/user-context";
 import { Header } from "./components/header/Header";
 import { Content } from "./components/content/index";

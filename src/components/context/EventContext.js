@@ -29,7 +29,6 @@ export const EventContexProvider = ({children}) =>{
     return (
     <EventBannerContex.Provider value ={
         {   user,
-            // ecoEvent,
             eventBanner,
             setEventBanner
         }
