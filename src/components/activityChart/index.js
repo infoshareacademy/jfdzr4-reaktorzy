@@ -129,9 +129,9 @@ export const ActivityChart = () => {
             return (
               <div
                 style={{
-                  width: "10px",
-                  height: "10px",
-                  margin: "1px",
+                  width: "1.4%",
+                  height: "11%",
+                  margin: "0.05vw",
                   backgroundColor: `rgb(24, 140, 24, 0.${box.progress})`,
                   border: "1px solid black",
                   borderRadius: "2px",
