@@ -5,7 +5,6 @@ import { Home } from "../home/index";
 import { History } from "../history/History";
 import { EcoActions } from "../ecoActions/EcoActions";
 import { EventDetails } from "../ecoActions/addForm/eventDetails";
-
 import { SignIn, SignUp } from "../sign";
 import "./style.css";
 import { useLocation } from "react-router-dom";
@@ -15,7 +14,6 @@ import { UserContext } from "../../controllers/user-context";
 export const Content = () => {
   const location = useLocation();
   const { isLoggedIn } = useContext(UserContext);
-  console.log(location);
   return (
     <div
       className={`content__wrapper ${
@@ -30,18 +28,14 @@ export const Content = () => {
             <Home />
           </ContentStyle>
         </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
         <Route path="/history">
           <History />
         </Route>
-        <Route path="/eco-actions">
-          <EcoActions />
+        <Route path="/profile">
+          <Profile />
         </Route>
-        <Route path="/eco-actions/:id">
-          <EventDetails />
-        </Route>
+        <Route exact path="/eco-actions" component={EcoActions} />
+        <Route path="/eco-actions/:id" component={EventDetails} />
         <Route path="/sign-in">
           <SignIn />
         </Route>
