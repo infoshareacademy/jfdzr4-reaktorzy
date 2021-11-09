@@ -4,8 +4,8 @@ export const ActivityChartContainer = styled.div`
   display: flex;
   flex-direction: row;
   background-color: white;
-  width: 100%;
-  height: 20vh;
+  width: 100vw;
+  height: calc(100vw / 7);
   justify-content: center;
 `;
 
@@ -15,13 +15,14 @@ export const DayName = styled.div`
   flex-direction: column;
   justify-content: space-around;
   margin: 5px;
-  padding-top: 1%;
+  padding-top: 2%;
+  padding-bottom: 0.5%;
 `;
 
 export const Paragraph = styled.p`
   font-size: x-small;
   margin: 1.5px;
-  font-size: 1.5vh;
+  font-size: calc(vw/50);
 `;
 
 export const MonthAndChartContainer = styled.div`
