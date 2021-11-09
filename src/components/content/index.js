@@ -4,7 +4,7 @@ import { ContentStyle } from "./styled";
 import { Home } from "../home/index";
 import { History } from "../history/History";
 import { EcoActions } from "../ecoActions/EcoActions";
-import { EventDetails } from "../ecoActions/addForm/eventDetails";
+import { EventDetails } from "../ecoActions/eventDetails";
 import { SignIn, SignUp } from "../sign";
 import "./style.css";
 import { useLocation } from "react-router-dom";
