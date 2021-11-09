@@ -103,8 +103,13 @@ export const Tiles = () => {
     setButtons(
       buttons.map((button) => {
         if (button.id === id) {
+          if (button.isDisabled) {
+            setActivity({ ...activity, [button.ecoAction]: false });
+          }
+          if (!button.isDisabled) {
+            setActivity({ ...activity, [button.ecoAction]: true });
+          }
           button.isDisabled = !button.isDisabled;
-          setActivity({ ...activity, [button.ecoAction]: true });
         }
         return button;
       })
@@ -148,17 +153,20 @@ export const Tiles = () => {
   return (
     <>
       <div className="body-tabel">
-        <div className='tiles-container'>
+        <div className="tiles-container">
           {buttons.map((button) =>
             button.isDisabled ? (
               <button
                 className="tiles tiles-shadow"
                 key={button.id}
                 onClick={() => allFunction(button.id)}
-                disabled={button.isDisabled}
               >
                 {
-                  <img className="tiles-img"alt={button.alt}src={button.src}/>
+                  <img
+                    className="tiles-img"
+                    alt={button.alt}
+                    src={button.src}
+                  />
                 }
               </button>
             ) : (
