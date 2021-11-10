@@ -11,7 +11,9 @@ import {Link} from 'react-router-dom'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import { SubscribeEventContex } from "../context/SubscribeContex"
-
+import { LogOutProfil } from "./profilLogOut"
+import '../ecoActions/index.css'
+import '../ecoActions/row/index.css'
 
 
 
@@ -20,6 +22,7 @@ export const Profile = () =>{
     const {user, subscribeEvents, setSubscribeEvents, handleDelete,} = useContext(SubscribeEventContex)
 
     useEffect(()=>{
+        if(user){
         Promise.all([
             fetch(`${DATABASE_URL}/ecoEvents.json`)
             .then(r => r.json()),
@@ -30,38 +33,43 @@ export const Profile = () =>{
             const filteredEvents = formattedData.filter(ecoEvent => (favouriteIds || []).includes(ecoEvent.id));
             setSubscribeEvents(filteredEvents)
         })
-    }, [])
+        }
+    }, [user])
     return (
-        <div>
-            <Typography variant="h5">Your subscribes</Typography>
-                {
-                    subscribeEvents.length === 0 && <Typography variant="body">You haven't subscribes events</Typography>
+        <>
+       { !! user ? (<div>
+           <Box className="green-event-title">
+            <Typography className="green-event-title-content">Your subscribes</Typography>
+                { 
+                    subscribeEvents.length === 0 && <Typography variant="body" className="green-event-title-content">You haven't subscribes events</Typography>
                 } 
-            <Box sx={{ flexGrow: 1,  maxWidth: '1200px', margin: 'auto'}} >
-                <Grid container spacing={2}>
+            </Box>
+            <Box className="green-event-container" >
+                <Grid className="grid-event-container" >
                     {subscribeEvents.map(ecoEvent => 
-                        <Grid item xs={3}>
-                            <Card sx={{ maxWidth: 345}} key={ecoEvent.id} >
-                                <CardMedia
+                        <Grid>
+                            <Card className="eventRow-conatiner" key={ecoEvent.id} >
+                                <CardMedia 
+                                    className="eventRow-image"
                                     component="img"
-                                    height="160"
+                                    // height="160"
                                     alt="Event image"
                                     src={ecoEvent.url || logo5}
 
                                 />
                                 <CardContent>
-                                    <Typography gutterBottom variant="h5" component="div" sx={{height: 60}} >
+                                    <Typography gutterBottom component="div" className="eventRow-title" >
                                         {ecoEvent.title} 
                                     </Typography>
-                                    <Typography variant="body2" color="text.secondary" sx={{height: 80, overflow: 'hidden'}}>
+                                    <Typography variant="body2" color="text.secondary" className="eventRow-description" >
                                     {ecoEvent.description}
                                     </Typography>
                                 </CardContent>
                                 <CardActions>
                                  
-                                    <Button variant="contained" color={'success'} size="small" sx={{width: '110px'}} onClick={()=>handleDelete(ecoEvent.id)}>Unsubscribes</Button> 
+                                    <Button variant="contained" color={'success'} className="eventRow-button" onClick={()=>handleDelete(ecoEvent.id)}>Unsubscribes</Button> 
                            
-                                    <Button size="small" sx={{width: '110px', marginLeft: '10px'}} component={Link} to={`/eco-actions/${ecoEvent.id}`}>
+                                    <Button className="eventRow-button" component={Link} to={`/eco-actions/${ecoEvent.id}`}>
                                         Learn More
                                     </Button>
                                 </CardActions>
@@ -70,6 +78,9 @@ export const Profile = () =>{
                     )}
                  </Grid>
             </Box> 
-        </div>
+        </div>)
+        : <LogOutProfil/>}
+        </>
+
     )
 }
