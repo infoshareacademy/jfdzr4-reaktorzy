@@ -61,7 +61,7 @@ export const Tiles = () => {
     },
     {
       id: 5,
-      title: "Garbage You eco action",
+      title: "You eco action",
       ecoAction: "action",
       isDisabled: false,
       alt: "trash image",

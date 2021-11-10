@@ -7,12 +7,14 @@ import logo5 from '../../assets/images.png'
 import { SubscribeEventContex } from "../../context/SubscribeContex";
 import {LogInModal} from '../logInModal/index'
 import './index.css'
+import { EventsContex } from "../../context/EventContext";
 
 
 
 export const EventDetails = (props) =>{
 
     const params = useParams()
+    const {fetchEvents} = useContext(EventsContex)
     const [isLoading, setIsLoading] = useState(true);
     const [ecoEvent, setEcoEvent] = useState(null)
     const {user, isSubscribe, handleStarClick} =useContext(SubscribeEventContex)
@@ -38,14 +40,15 @@ export const EventDetails = (props) =>{
       return <LoadingEvents/>
     }
 
-    const fetchEvents = () => {
-      fetch(`${DATABASE_URL}/ecoEvents.json`)
-          .then(r => r.json())
-          .then(data => {
-              const formattedData = Object.keys(data).map(key => ({id: key, ...data[key]}));
-              setEcoEvent(formattedData);
-          })          
-  }
+  //   const fetchEvents = () => {
+  //     fetch(`${DATABASE_URL}/ecoEvents.json`)
+  //         .then(r => r.json())
+  //         .then(data => {
+  //             const formattedData = Object.keys(data).map(key => ({id: key, ...data[key]}));
+  //             setEcoEvents(formattedData);
+              
+  //         })          
+  // }
   const onButtonBackClick = () => {
     props.history.push('/eco-actions');
 }
@@ -55,17 +58,16 @@ export const EventDetails = (props) =>{
           method: 'DELETE'
       }).then(() => {
         fetchEvents();
-        onButtonBackClick()
+        onButtonBackClick();
       })
     }
  
     return(
       <>
       <div className="eventDetails-component">
-        <div className="eventDetails-container">
               {
-                ecoEvent ? (
-              <div style={{display: 'flex'}}>
+                ecoEvent ? ( 
+              <div className="eventDetails-container">
                 <div>
                       <img className="eventDetails-image" alt='Event image'src={ecoEvent.url || logo5} />
                 </div>
@@ -75,27 +77,28 @@ export const EventDetails = (props) =>{
                         <p variant="caption" className="eventDetails-description">
                           {ecoEvent.description}
                         </p>
+                        <p>{ecoEvent.id}</p>
                       </div>
-                      <div className="eventDetails-button-container">
+                      <div>
                           {!!user ? (
-                              <div>
+                              <div className="eventDetails-button-container">
+                              {(ecoEvent.author === user.uid ) && <Button variant="contained" onClick={handleDeleted} color={'primary'} className="eventDetails-button">delete</Button>}
                                 {
-                                isSubscribe(params.id) ? <Button className="eventDetails-button" style={{marginRight: 5}} variant="contained" color={'success'} size="small" onClick={()=>handleStarClick(params.id)}>Unsubscribes</Button> 
-                                    : <Button variant="contained" color={'primary'} style={{marginRight: 5}} className="eventDetails-button" size="small"  onClick={()=>handleStarClick(params.id)}>Subscribe</Button> 
+                                isSubscribe(params.id) ? <Button className="eventDetails-button" variant="contained" color={'success'}
+                                 onClick={()=>handleStarClick(params.id)}>Unsubscribes</Button> 
+                                    : <Button variant="contained" color={'primary'} className="eventDetails-button" onClick={()=>handleStarClick(params.id)}>Subscribe</Button> 
                                 } 
-                                <Button variant="contained" onClick={handleDeleted} size="small" color={'primary'} className="eventDetails-button">delete</Button>
+                               
                               </div>
                                   )   
                           :  <Button variant="contained" color={'success'} size="small" className="eventDetails-button" onClick={handleClickOpen}>Subscribe</Button>
                           }
-                      </div>
+                    </div>
                     </div>
                   </div>
                 )
                 : <LoadingEvents/>
               }
-
-        </div>
       </div>
       <LogInModal isOpen={isOpen} handleClose={handleClose}/>
     </>
