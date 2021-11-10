@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import { SubscribeEventContex } from "../context/SubscribeContex";
 import { ActivityChart } from "../activityChart";
+import { ScoreTable } from "../scoreTable";
 
 export const Profile = () => {
   const { user, subscribeEvents, setSubscribeEvents, handleDelete } =
@@ -95,6 +96,7 @@ export const Profile = () => {
           ))}
         </Grid>
       </Box>
+      <ScoreTable />
     </div>
   );
 };
