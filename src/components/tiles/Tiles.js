@@ -15,7 +15,12 @@ import { DATABASE_URL } from "../../firebase-config";
 import { getCurrentDate } from "../../controllers/get-date/getDate";
 import { ProgressContex } from "../context/ProgressContex";
 import { UserContext } from "../../controllers/user-context";
-import { loadDateActivity, sendDataActivity, totalCount } from "../../services";
+import {
+  loadDateActivity,
+  loadUserScore,
+  sendDataActivity,
+  totalCount,
+} from "../../services";
 
 export const Tiles = () => {
   const { setProgressLevel } = useContext(ProgressContex);

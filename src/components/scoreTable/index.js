@@ -8,9 +8,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { brown } from "@mui/material/colors";
-import { green } from "@mui/material/colors";
+import { brown, green } from "@mui/material/colors";
+
+//Import Image
 import leafIcon from "../../assets/leafIcon.png";
+
+import { loadUserScore, sendUserScore } from "../../services";
+import { DATABASE_URL } from "../../firebase-config";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "../../controllers/user-context";
 
 const rows = [
   { location: 3, score: 230 },
@@ -41,6 +47,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export const ScoreTable = () => {
+  const { isLoggedIn } = useContext(UserContext);
+  const userId = isLoggedIn.uid;
+
+  const [userScore, setUserScore] = useState(null);
+
+  useEffect(() => {
+    loadUserScore(DATABASE_URL, userId)
+      .then((r) => r.json())
+      .then((data) => {
+        const formatedData = Object.keys(data)
+          .map((key) => data[key].total)
+          .reduce(
+            (previousValue, currentValue) => previousValue + currentValue
+          );
+        setUserScore(formatedData);
+      });
+  }, []);
+
+  useEffect(() => {
+    sendUserScore(DATABASE_URL, userId, userScore);
+  }, [userScore]);
+
   return (
     <ScoreTableContainer>
       <TableContainer component={Paper}>
