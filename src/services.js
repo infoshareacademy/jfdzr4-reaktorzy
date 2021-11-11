@@ -48,3 +48,7 @@ export const sendUserScore = (DATABASE_URL, userId, score) => {
     body: JSON.stringify({ score }),
   });
 };
+
+export const loadAllUsersScore = (DATABASE_URL) => {
+  return fetch(`${DATABASE_URL}/usersScore.json`);
+};

@@ -13,16 +13,16 @@ import { brown, green } from "@mui/material/colors";
 //Import Image
 import leafIcon from "../../assets/leafIcon.png";
 
-import { loadUserScore, sendUserScore } from "../../services";
+import {
+  loadUserScore,
+  sendUserScore,
+  loadAllUsersScore,
+} from "../../services";
 import { DATABASE_URL } from "../../firebase-config";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../controllers/user-context";
 
-const rows = [
-  { location: 3, score: 230 },
-  { location: 2, score: 200 },
-  { location: 1, score: 30 },
-];
+let rows = [];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: brown[500],
@@ -51,6 +51,7 @@ export const ScoreTable = () => {
   const userId = isLoggedIn.uid;
 
   const [userScore, setUserScore] = useState(null);
+  const [allUserScore, setAllUserScore] = useState([]);
 
   useEffect(() => {
     loadUserScore(DATABASE_URL, userId)
@@ -63,11 +64,34 @@ export const ScoreTable = () => {
           );
         setUserScore(formatedData);
       });
+    loadAllUsersScore(DATABASE_URL)
+      .then((r) => r.json())
+      .then((data) => {
+        const formatedData = Object.keys(data)
+          .map((key) => data[key].score)
+          .sort((a, b) => b - a);
+        setAllUserScore(formatedData);
+      });
   }, []);
 
   useEffect(() => {
     sendUserScore(DATABASE_URL, userId, userScore);
-  }, [userScore]);
+    const userLocation = allUserScore.indexOf(userScore);
+    if (userLocation === 0) {
+      rows = [
+        { location: 1, score: userScore },
+        { location: 2, score: allUserScore[1] },
+        { location: 3, score: allUserScore[2] },
+      ];
+    } else if (userLocation > 0) {
+      rows = [
+        { location: userLocation, score: allUserScore[userLocation - 1] },
+        { location: userLocation + 1, score: userScore },
+        { location: userLocation + 2, score: allUserScore[userLocation + 1] },
+      ];
+      console.log(rows);
+    }
+  }, [userScore, allUserScore]);
 
   return (
     <ScoreTableContainer>
