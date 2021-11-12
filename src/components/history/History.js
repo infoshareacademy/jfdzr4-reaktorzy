@@ -19,7 +19,6 @@ import {
 import { UserContext } from "../../controllers/user-context";
 import { MobileHistory } from "./MobileHistory";
 
-import "./style.scss";
 import "./History.scss";
 
 export const History = () => {
