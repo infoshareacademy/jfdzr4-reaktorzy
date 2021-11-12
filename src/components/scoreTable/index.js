@@ -28,9 +28,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     backgroundColor: brown[500],
     color: theme.palette.common.white,
     textAlign: "center",
+    fontSize: 20,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 16,
+    fontSize: 20,
     textAlign: "center",
     lineHeight: "100%",
   },

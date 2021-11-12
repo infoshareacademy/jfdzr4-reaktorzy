@@ -37,8 +37,10 @@ export const Profile = () => {
   }, []);
   return (
     <div>
-      <h3>Profile</h3>
-      <ActivityChart />
+      <div style={{ display: "flex" }}>
+        <ActivityChart />
+        <ScoreTable />
+      </div>
       <Typography variant="h5">Your subscribes</Typography>
       {subscribeEvents.length === 0 && (
         <Typography variant="body">You haven't subscribes events</Typography>
@@ -96,7 +98,6 @@ export const Profile = () => {
           ))}
         </Grid>
       </Box>
-      <ScoreTable />
     </div>
   );
 };

@@ -26,6 +26,7 @@ export const Paragraph = styled.p`
 `;
 
 export const MonthAndChartContainer = styled.div`
+  margin-top: 10px;
   width: 90%;
   height: 100%;
 `;

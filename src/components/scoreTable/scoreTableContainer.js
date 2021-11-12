@@ -2,7 +2,10 @@ import styled from "styled-components";
 
 export const ScoreTableContainer = styled.div`
   min-width: 150px;
-  width: 200px;
-  height: 40%;
-  background-color: grey;
+  width: 250px;
+  height: auto;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 20px;
 `;
