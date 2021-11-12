@@ -10,12 +10,15 @@ import { green } from "@mui/material/colors";
 import Checkbox from "@mui/material/Checkbox";
 
 import { DATABASE_URL } from "../../firebase-config";
-import { loadUserActivityData, totalCount } from "../../services";
+import {
+  loadUserActivityData,
+  loadUserScore,
+  sendUserScore,
+  totalCount,
+} from "../../services";
 import { UserContext } from "../../controllers/user-context";
 
-
-import './style.scss'
-
+import "./style.scss";
 
 export const History = () => {
   const [rows, setRows] = useState([]);
@@ -197,4 +200,3 @@ export const History = () => {
     </TableContainer>
   );
 };
-

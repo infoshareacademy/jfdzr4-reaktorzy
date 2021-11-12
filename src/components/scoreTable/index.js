@@ -22,7 +22,6 @@ import { DATABASE_URL } from "../../firebase-config";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../controllers/user-context";
 
-let rows = [];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: brown[500],
@@ -51,6 +50,7 @@ export const ScoreTable = () => {
   const { isLoggedIn } = useContext(UserContext);
   const userId = isLoggedIn.uid;
 
+  const [rows, setRows] = useState([]);
   const [userScore, setUserScore] = useState(null);
   const [allUserScore, setAllUserScore] = useState([]);
 
@@ -64,35 +64,39 @@ export const ScoreTable = () => {
             (previousValue, currentValue) => previousValue + currentValue
           );
         setUserScore(formatedData);
-      });
-    loadAllUsersScore(DATABASE_URL)
-      .then((r) => r.json())
-      .then((data) => {
-        const formatedData = Object.keys(data)
-          .map((key) => data[key].score)
-          .sort((a, b) => b - a);
-        setAllUserScore(formatedData);
+        sendUserScore(DATABASE_URL, userId, formatedData).then(() => {
+          loadAllUsersScore(DATABASE_URL)
+            .then((r) => r.json())
+            .then((data) => {
+              const formatedData = Object.keys(data)
+                .map((key) => data[key].score)
+                .sort((a, b) => b - a);
+              setAllUserScore(formatedData);
+            });
+        });
       });
   }, []);
 
   useEffect(() => {
-    sendUserScore(DATABASE_URL, userId, userScore);
     const userLocation = allUserScore.indexOf(userScore);
+    console.log(userLocation, "   ", allUserScore);
     if (userLocation === 0) {
-      rows = [
+      setRows([
         { location: 1, score: userScore },
         { location: 2, score: allUserScore[1] },
         { location: 3, score: allUserScore[2] },
-      ];
+      ]);
     } else if (userLocation > 0) {
-      rows = [
+      setRows([
         { location: userLocation, score: allUserScore[userLocation - 1] },
         { location: userLocation + 1, score: userScore },
-        { location: userLocation + 2, score: allUserScore[userLocation + 1] },
-      ];
-      console.log(rows);
+        {
+          location: userLocation + 2,
+          score: allUserScore[userLocation + 1],
+        },
+      ]);
     }
-  }, [userScore, allUserScore]);
+  }, [allUserScore, userScore]);
 
   return (
     <ScoreTableContainer>
