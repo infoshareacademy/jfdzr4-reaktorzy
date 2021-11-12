@@ -117,9 +117,10 @@ export function Header() {
             <MenuItem>
               <Avatar /> Profile
             </MenuItem>
-            <MenuItem>
+            <Link to='/my-account'><MenuItem>
               <Avatar /> My account
             </MenuItem>
+            </Link>
             <Divider />
             <MenuItem>
               <ListItemIcon>

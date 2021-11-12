@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { Wrapper } from '../wrapper/index'
-import { ProgressBar } from '../progressBar/Index'
+import { ProgressBar } from '../ProgressBar/index'
 import { Tiles } from '../tiles/Tiles'
 
 import { UserActivity } from '../../controllers/user-activity/index'
