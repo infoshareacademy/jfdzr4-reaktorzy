@@ -56,7 +56,7 @@ export const EcoEventRow =({ecoEvent, newFetch}) =>{
                                 Subscribe
                             </Button>
                     }
-                    <Button size="small" className="eventRow-button" component={Link} to={`/eco-actions/${ecoEvent.id}`}>
+                    <Button className="eventRow-button" component={Link} to={`/eco-actions/${ecoEvent.id}`}>
                         Learn More
                     </Button>
                 </CardActions>

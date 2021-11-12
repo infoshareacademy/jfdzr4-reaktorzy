@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import {useState, useEffect, useContext} from 'react'
 import { AddEcoEvent } from './addForm';
-import { DATABASE_URL } from '../../firebase-config';
+// import { DATABASE_URL } from '../../firebase-config';
 import { EcoEventRow } from './row/index';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -10,12 +10,12 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { SubscribeEventContex } from '../context/SubscribeContex';
 import './index.css'
 import Typography from '@mui/material/Typography';
+import { EventsContex } from '../context/EventContext';
 
 export const EcoActions = () => {
 
-    const [ecoEvents, setEcoEvents] = useState()
     const [isOpen, setIsOpen] = useState(false);
-
+    const {ecoEvents, fetchEvents} = useContext(EventsContex)
     const {user, fetchSubscribeEvents} = useContext(SubscribeEventContex)
 
     const handleClickOpen = () => {
@@ -25,15 +25,6 @@ export const EcoActions = () => {
         setIsOpen(false);
     };
 
-    const fetchEvents = () => {
-        fetch(`${DATABASE_URL}/ecoEvents.json`)
-            .then(r => r.json())
-            .then(data => {
-                const formattedData = Object.keys(data).map(key => ({id: key, ...data[key]}));
-                setEcoEvents(formattedData);
-            })          
-    }
-
     useEffect(()=>{
         fetchEvents()
         fetchSubscribeEvents()
@@ -42,7 +33,7 @@ export const EcoActions = () => {
     return (
         <>  
             <Box className="green-event-title">
-                <Typography variant="h4" component="div" gutterBottom className="green-event-title-content"> Green events...</Typography>
+                <Typography component="div" gutterBottom className="green-event-title-content"> Green events...</Typography>
             </Box>
             <Box  className="green-event-container">
                 <Grid className="grid-event-container" >
@@ -66,7 +57,7 @@ export const EcoActions = () => {
                         <AddCircleIcon/>
                     </Button> )}
             </Box>             
-            <AddEcoEvent isOpen={isOpen} handleClickClose={handleClickClose} fetchEvents={fetchEvents} />
+            {user && <AddEcoEvent isOpen={isOpen} handleClickClose={handleClickClose} fetchEvents={fetchEvents}/>}
         </>
     )
 }

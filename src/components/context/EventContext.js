@@ -1,39 +1,30 @@
-import { getDownloadURL, getStorage, ref } from "firebase/storage"
 import { createContext, useEffect, useState } from "react"
-import {getAuth, onAuthStateChanged} from "firebase/auth";
+import { DATABASE_URL } from '../../firebase-config';
 
 
-export const EventBannerContex = createContext(null)
+
+export const EventsContex = createContext(null)
 
 export const EventContexProvider = ({children}) =>{
-    const [user, setUser] = useState(null);
-    const [eventBanner, setEventBanner] = useState(null)
-
-    useEffect(() => {
-        const auth = getAuth();
-        const storage = getStorage();
     
-        onAuthStateChanged(auth, (user) => {
-            setUser(user);
-    
-            if (user) {
-                const storageRef = ref(storage, `eventBanner/${user.uid}`);
-                getDownloadURL(storageRef)
-                    .then(url => setEventBanner(url))
-            } else {
-                setEventBanner(null);
-            }
-        });
-    }, [])
+const [ecoEvents, setEcoEvents] = useState()
 
+const fetchEvents = () => {
+    fetch(`${DATABASE_URL}/ecoEvents.json`)
+        .then(r => r.json())
+        .then(data => {
+            const formattedData = Object.keys(data).map(key => ({id: key, ...data[key]}));
+            setEcoEvents(formattedData);
+        })          
+}
     return (
-    <EventBannerContex.Provider value ={
-        {   user,
-            eventBanner,
-            setEventBanner
+    <EventsContex.Provider value ={
+        {   ecoEvents,
+            setEcoEvents,
+            fetchEvents
         }
     }>
         {children}
-    </EventBannerContex.Provider>
+    </EventsContex.Provider>
     )
 }

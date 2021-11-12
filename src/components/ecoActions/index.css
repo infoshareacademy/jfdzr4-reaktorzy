@@ -1,6 +1,6 @@
 .green-event-title{
-    display: 'flex';
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -10,27 +10,59 @@
 .green-event-title-content{
   margin: 0;
   padding: 15px 0px 15px 15px;
-  display: 'flex';
-  flex-direction: row;
-  justify-content: center;
-  align-self: center;
+  font-size: 22px !important;
 }
+
 .green-event-container{
   flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-
-}
-.addEvent-button{
-    position: fixed;
-    bottom: 10px;
-    left: 85%
+  max-width: 400px;
+  margin: auto;
 }
 
 .grid-event-container{
   display: flex;
+  justify-content: center;
+  margin: 0;
   flex-wrap: wrap;
   grid-template-columns: auto auto auto auto;
   grid-gap: 15px; 
-  margin: auto;
+}
+.addEvent-button{
+  position: fixed;
+  bottom: 10px;
+  left: 70%
+}
+
+.link {
+  text-decoration: none;
+  color: green;
+}
+.link:hover {
+   color: white;
+}
+@media (min-width: 768px) {
+
+  .green-event-title-content{
+    font-size: 26px !important;
+  }
+  .green-event-container{
+    max-width: 700px;
+  }
+  .addEvent-button{
+      position: fixed;
+      bottom: 10px;
+      left: 85%
+  }
+
+  .grid-event-container{
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 992px) {
+
+    .green-event-container{
+      max-width: 1200px;
+    }
+
 }

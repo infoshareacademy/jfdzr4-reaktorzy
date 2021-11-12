@@ -1,12 +1,32 @@
 
 .textField-addEvent{
-    width: 500px;
-    /* max-width: 100%; */
-    /* margin: 10px; */
+    width: 300px;
+    margin: 10px !important;
 }
 
 .button-addEvent-image{
-    width: 150px;
-    max-width: 100%;
-    margin: 10px;
+    width: 300px;
+    font-size: 10px !important;
+    margin: 10px !important;
+}
+
+.event-button-group{
+    width: 90px;
+    font-size: 10px!important;
+}
+
+@media(min-width: 768px){
+    .textField-addEvent{
+        width: 500px;
+    }
+    
+    .button-addEvent-image{
+        width: 150px;
+        max-width: 100%;
+        font-size: 14px !important;
+    }
+    .event-button-group{
+        width: 120px;
+        font-size: 14px!important;
+    }
 }
