@@ -23,7 +23,7 @@ export const AddEcoEvent = ({isOpen, handleClickClose, fetchEvents}) =>{
     const [ecoEvents, setEcoEvents] = useState({
         title: '',
         description: '',
-        author: ''
+        author: user.uid
     })
     const handleFile = (event) => {
         setFile(event.target.files[0]);
@@ -50,9 +50,10 @@ export const AddEcoEvent = ({isOpen, handleClickClose, fetchEvents}) =>{
             })
         })
     }
- 
+
     return (
-        <Dialog
+        <>
+         { user && (<Dialog
             open={isOpen}
             TransitionComponent={Transition}
             keepMounted
@@ -64,8 +65,6 @@ export const AddEcoEvent = ({isOpen, handleClickClose, fetchEvents}) =>{
                         onChange={handleOnChange}
                         inputProps={{ maxLength: 25 }}
                         required
-                        
-                        sx={{ margin: '10px'}}
                         className="textField-addEvent"
                         />
                         <TextField
@@ -78,13 +77,11 @@ export const AddEcoEvent = ({isOpen, handleClickClose, fetchEvents}) =>{
                             multiline
                             rows={6}
                             className="textField-addEvent"
-                            sx={{margin: '10px'}} 
                             onChange={handleOnChange}
                             required
                         />
-                       <input type="text" hiddenv/>
                     <Box>
-                        <Button variant="contained" color='primary' component="label" className='button-addEvent-image'sx={{margin: '10px'}}>
+                        <Button variant="contained" color='primary' component="label" className='button-addEvent-image'>
                             <AttachFileIcon /> 
                                 Add Image
                                 <input type="file" hidden onChange={handleFile}/>
@@ -96,10 +93,11 @@ export const AddEcoEvent = ({isOpen, handleClickClose, fetchEvents}) =>{
                         }
                     </Box>
             <DialogActions>
-                <Button onClick={handleSubmit} variant="contained" color='primary'>Add event</Button>
-                <Button onClick={handleClickClose}>Cancel</Button>
+                <Button onClick={handleSubmit} className="event-button-group" variant="contained" color='primary'>Add event</Button>
+                <Button onClick={handleClickClose} className="event-button-group" >Cancel</Button>
             </DialogActions>
             
-        </Dialog>
+        </Dialog>)}
+        </>
     );
 }
