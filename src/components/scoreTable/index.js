@@ -12,6 +12,7 @@ import { brown, green } from "@mui/material/colors";
 
 //Import Image
 import leafIcon from "../../assets/leafIcon.png";
+import leafIcon2 from "../../assets/leafIcon2.png";
 
 import {
   loadUserScore,
@@ -82,14 +83,14 @@ export const ScoreTable = () => {
     console.log(userLocation, "   ", allUserScore);
     if (userLocation === 0) {
       setRows([
-        { location: 1, score: userScore },
+        { location: "YOU", score: userScore },
         { location: 2, score: allUserScore[1] },
         { location: 3, score: allUserScore[2] },
       ]);
     } else if (userLocation > 0) {
       setRows([
         { location: userLocation, score: allUserScore[userLocation - 1] },
-        { location: userLocation + 1, score: userScore },
+        { location: "YOU", score: userScore },
         {
           location: userLocation + 2,
           score: allUserScore[userLocation + 1],
@@ -120,7 +121,18 @@ export const ScoreTable = () => {
                     }}
                   >
                     {row.location}
-                    <img src={leafIcon} width={"30%"} height={"auto"}></img>
+                    <img
+                      src={
+                        row.score > 80
+                          ? leafIcon
+                          : row.score > 30
+                          ? leafIcon2
+                          : ""
+                      }
+                      width={"30%"}
+                      height={"auto"}
+                      alt=""
+                    ></img>
                   </div>
                 </StyledTableCell>
                 <StyledTableCell align="right">{row.score}</StyledTableCell>
