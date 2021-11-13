@@ -10,6 +10,7 @@ import "./style.css";
 import { useLocation } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../controllers/user-context";
+import { MyAccount } from "../myAccount/MyAccount";
 
 export const Content = () => {
   const location = useLocation();
@@ -36,6 +37,9 @@ export const Content = () => {
         </Route>
         <Route exact path="/eco-actions" component={EcoActions} />
         <Route path="/eco-actions/:id" component={EventDetails} />
+        <Route path="/my-account">
+            <MyAccount/>
+        </Route>
         <Route path="/sign-in">
           <SignIn />
         </Route>
