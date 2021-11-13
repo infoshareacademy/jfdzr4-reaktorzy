@@ -17,7 +17,7 @@ import { SubscribeEventContex } from "../context/SubscribeContex";
 import { LogOutProfil } from "./profilLogOut";
 import "../ecoActions/index.css";
 import "../ecoActions/row/index.css";
-
+import { Auth } from "../auth/Auth";
 export const Profile = () => {
   const { user, subscribeEvents, setSubscribeEvents, handleDelete } =
     useContext(SubscribeEventContex);
@@ -43,7 +43,7 @@ export const Profile = () => {
   }, [user]);
   return (
     <>
-      {!!user ? (
+      <Auth>
         <div>
           <div style={{ display: "flex" }}>
             <ActivityChart />
@@ -111,9 +111,7 @@ export const Profile = () => {
             </Grid>
           </Box>
         </div>
-      ) : (
-        <LogOutProfil />
-      )}
+      </Auth>
     </>
   );
 };

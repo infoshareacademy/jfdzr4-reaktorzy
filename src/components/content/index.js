@@ -37,7 +37,7 @@ export const Content = () => {
         <Route exact path="/eco-actions" component={EcoActions} />
         <Route path="/eco-actions/:id" component={EventDetails} />
         <Route path="/sign-in">
-          <SignIn />
+          < SignIn/>
         </Route>
         <Route path="/sign-up">
           <SignUp />
