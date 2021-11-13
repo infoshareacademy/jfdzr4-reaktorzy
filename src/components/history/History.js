@@ -10,63 +10,59 @@ import { green } from "@mui/material/colors";
 import Checkbox from "@mui/material/Checkbox";
 
 import { DATABASE_URL } from "../../firebase-config";
-import { loadUserActivityData, totalCount } from "../../services";
+import {
+  loadUserActivityData,
+  loadUserScore,
+  sendUserScore,
+  totalCount,
+} from "../../services";
 import { UserContext } from "../../controllers/user-context";
 import { MobileHistory } from "./MobileHistory";
 
-import './History.scss'
-
+import "./History.scss";
 
 export const History = () => {
   const [rows, setRows] = useState([]);
-  const [ isMobile, setIsMobile ] = useState (false);
+  const [isMobile, setIsMobile] = useState(false);
   const { isLoggedIn } = useContext(UserContext);
-  const [userId, setUserId] = useState(null)
-  
+  const [userId, setUserId] = useState(null);
 
   useEffect(() => {
-    function handleResize () {
-
+    function handleResize() {
       if (window.innerWidth < 576) {
-        setIsMobile(true)
+        setIsMobile(true);
       }
-       if (window.innerWidth > 576) {
-        setIsMobile(false)
-        
+      if (window.innerWidth > 576) {
+        setIsMobile(false);
       }
-   
     }
 
     handleResize();
 
     window.addEventListener("resize", handleResize);
 
-      return () => {
-        window.removeEventListener("resize", handleResize);
-      }
-
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
-  useEffect (()=> {
-    
-    if ( isLoggedIn) {
+  useEffect(() => {
+    if (isLoggedIn) {
       loadUserActivityData(isLoggedIn.uid)
-      .then((r) => r.json())
-      .then((data) => {
-        if (data) {
-          const formattedData = Object.keys(data).map((key) => ({
-            date: key,
-            ...data[key],
-          }));
-          setRows(formattedData.slice(-10));
-        }
-      });
+        .then((r) => r.json())
+        .then((data) => {
+          if (data) {
+            const formattedData = Object.keys(data).map((key) => ({
+              date: key,
+              ...data[key],
+            }));
+            setRows(formattedData.slice(-10));
+          }
+        });
 
-
-      setUserId(isLoggedIn.uid)
+      setUserId(isLoggedIn.uid);
     }
-  }, [isLoggedIn])
-
+  }, [isLoggedIn]);
 
   const updateActivityInDatabase = (rows, index, userId) => {
     let activityAndTotal = {};
@@ -79,7 +75,6 @@ export const History = () => {
   };
 
   const handleClick = (event, index, name) => {
-    
     const rowsCopy = [...rows];
     rowsCopy[index][name] = event.target.checked;
     setRows(calculateTotal(rowsCopy));
@@ -234,4 +229,3 @@ export const History = () => {
     </>
   );
 };
-
