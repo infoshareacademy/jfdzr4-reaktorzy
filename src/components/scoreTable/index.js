@@ -100,9 +100,12 @@ export const ScoreTable = () => {
   }, [allUserScore, userScore]);
 
   return (
-    <ScoreTableContainer>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 80 }} aria-label="customized table">
+    <ScoreTableContainer style={{ height: "400px", background: "transparent" }}>
+      <TableContainer
+        component={Paper}
+        style={{ height: "400px", display: "flex" }}
+      >
+        <Table aria-label="customized table">
           <TableHead>
             <TableRow>
               <StyledTableCell>Location</StyledTableCell>
@@ -123,7 +126,7 @@ export const ScoreTable = () => {
                     {row.location}
                     <img
                       src={
-                        row.score > 80
+                        row.score > 67
                           ? leafIcon
                           : row.score > 30
                           ? leafIcon2
