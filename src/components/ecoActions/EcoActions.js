@@ -48,9 +48,8 @@ export const EcoActions = () => {
             {ecoEvents ? (
               ecoEvents.map((ecoEvent) => {
                 return (
-                  <Grid>
+                  <Grid key={ecoEvent.id}>
                     <EcoEventRow
-                      key={ecoEvent.id}
                       newFetch={fetchEvents}
                       ecoEvent={ecoEvent}
                       isOpen={isOpen}

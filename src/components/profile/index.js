@@ -65,7 +65,7 @@ export const Profile = () => {
 
           {!!user ? (
             <div
-              class="container"
+              className="container"
               style={{
                 display: "flex",
                 flexDirection: "row",
@@ -103,8 +103,8 @@ export const Profile = () => {
                 <Box className="green-event-container">
                   <Grid className="grid-event-container">
                     {subscribeEvents.map((ecoEvent) => (
-                      <Grid>
-                        <ProfileEvents key={ecoEvent.id} ecoEvent={ecoEvent} />
+                      <Grid key={ecoEvent.id}>
+                        <ProfileEvents ecoEvent={ecoEvent} />
                       </Grid>
                     ))}
                   </Grid>

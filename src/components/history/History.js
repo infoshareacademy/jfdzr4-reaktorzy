@@ -57,7 +57,7 @@ export const History = () => {
               date: key,
               ...data[key],
             }));
-            setRows(formattedData.slice(-10));
+            setRows(formattedData.slice(-7));
           }
         });
 
