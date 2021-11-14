@@ -11,24 +11,30 @@ import { useState, useContext} from 'react';
 import { SubscribeEventContex } from '../../context/SubscribeContex';
 import {LogInModal} from '../logInModal/index'
 import './index.css'
+import { EventBanner } from '../../context/EventImage';
 
-export const EcoEventRow =({ecoEvent, newFetch}) =>{
+export const EcoEventRow =({ecoEvent}) =>{
+
+    
     const {user, isSubscribe, handleStarClick} =useContext(SubscribeEventContex)
-
+    const {eventBanner} = useContext(EventBanner)
     const [isOpen, setIsOpen] = useState(false);
       const handleClickOpen = () => {
         setIsOpen(true);
+        console.log(eventBanner)
       };
       const handleClose = () => {
         setIsOpen(false);
       };
+
+      
     return(
         <>
             <Card className="eventRow-conatiner">
                 <CardMedia
                     className="eventRow-image"
                     component="img"
-                    alt="Event image"
+                    alt="Event banner"
                     src={ecoEvent.url || logo5} 
                 />
 
@@ -56,7 +62,9 @@ export const EcoEventRow =({ecoEvent, newFetch}) =>{
                                 Subscribe
                             </Button>
                     }
-                    <Button className="eventRow-button" component={Link} to={`/eco-actions/${ecoEvent.id}`}>
+                    <Button className="eventRow-button" 
+                    component={Link} to={`/eco-actions/${ecoEvent.id}`}
+                    >
                         Learn More
                     </Button>
                 </CardActions>

@@ -5,12 +5,14 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
-import { forwardRef, useState, useContext } from 'react';
+import { forwardRef, useState, useContext, useEffect } from 'react';
 import { DATABASE_URL } from '../../../firebase-config';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import Typography from '@mui/material/Typography';
 import './index.css'
 import { SubscribeEventContex } from '../../context/SubscribeContex';
+import { EventBanner } from '../../context/EventImage';
+import { getDownloadURL, getStorage, ref, uploadBytes } from '@firebase/storage';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -18,37 +20,60 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export const AddEcoEvent = ({isOpen, handleClickClose, fetchEvents}) =>{
 
+
     const {user} = useContext(SubscribeEventContex)
+    const [eventBanner, setEventBanner] = useState(null)
     const [file, setFile] =useState(null)
+    
     const [ecoEvents, setEcoEvents] = useState({
         title: '',
         description: '',
-        author: user.uid
+        author: user.uid,
+        url: ''
     })
+
     const handleFile = (event) => {
         setFile(event.target.files[0]);
     }
-  
+    const handleCancel = ()=>{
+        handleClickClose()
+        setFile(null)
+    }
     const handleOnChange = (e) =>{
         setEcoEvents({
             ...ecoEvents,
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
         })
     }     
 
-
-    const handleSubmit =(e)=>{
-        fetch(`${DATABASE_URL}/ecoEvents.json`,{
-            method: 'POST',
-            body: JSON.stringify(ecoEvents)
-        }).then(()=>{
-            handleClickClose()
-            fetchEvents()
-            setEcoEvents({
-                title: '',
-                description: ''
+    const addBanner =()=>{
+        const storage = getStorage();
+        const storageRef = ref(storage, `banners/${file.name}`) 
+       return uploadBytes(storageRef, file).then((snapshot) => {
+            setFile(null);
+            return getDownloadURL(storageRef).then(url=>{
+                return url
             })
         })
+    }
+
+    const handleSubmit =()=>{
+        addBanner().then((url) =>{
+
+            fetch(`${DATABASE_URL}/ecoEvents.json`,{
+                method: 'POST', 
+                body: JSON.stringify({...ecoEvents, url})
+            }).then(()=>{
+                handleClickClose();
+                setFile(null)
+                fetchEvents();
+                setEcoEvents({
+                    title: '',
+                    description: ''
+                });
+        })
+        })
+           
     }
 
     return (
@@ -94,9 +119,10 @@ export const AddEcoEvent = ({isOpen, handleClickClose, fetchEvents}) =>{
                     </Box>
             <DialogActions>
                 <Button onClick={handleSubmit} className="event-button-group" variant="contained" color='primary'>Add event</Button>
-                <Button onClick={handleClickClose} className="event-button-group" >Cancel</Button>
+                <Button onClick={handleCancel} className="event-button-group" >Cancel</Button>
             </DialogActions>
-            
+            <br/>
+                        {eventBanner}
         </Dialog>)}
         </>
     );
