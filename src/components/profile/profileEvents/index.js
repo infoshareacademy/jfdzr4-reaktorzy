@@ -7,14 +7,14 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import {Link} from 'react-router-dom'
 import '../../ecoActions/row/index.css'
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { SubscribeEventContex } from "../../context/SubscribeContex";
 import { DATABASE_URL } from "../../../firebase-config";
 
 
-export const ProfileEvents = ({ecoEvent}) =>{
+export const ProfileEvents = ({ecoEvent, newPromise}) =>{
 
-    const {user, fetchSubscribeEvents} = useContext(SubscribeEventContex)
+    const {user, fetchSubscribeEvents, subscribeEvents, setSubscribeEvents} = useContext(SubscribeEventContex)
 
 
     const newFetch = (data)=> fetch(`${DATABASE_URL}/subscribeEvents/${user.uid}.json`, {
@@ -22,10 +22,12 @@ export const ProfileEvents = ({ecoEvent}) =>{
                 body: JSON.stringify(data)
             })
             .then(() => {
-                fetchSubscribeEvents()
+                newPromise()
+                // fetchSubscribeEvents()
                 console.log(ecoEvent.title)
                 console.log(ecoEvent.description)
             })
+
 
     const handleRemoveSubEvent = (ecoEventId) => {
         Promise.all([

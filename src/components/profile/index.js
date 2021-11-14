@@ -16,7 +16,7 @@ export const Profile = () => {
   const { user, subscribeEvents, setSubscribeEvents } =
     useContext(SubscribeEventContex);
 
-  useEffect(() => {
+  const newPromise = () => {
     if (user) {
       Promise.all([
         fetch(`${DATABASE_URL}/ecoEvents.json`).then((r) => r.json()),
@@ -34,6 +34,9 @@ export const Profile = () => {
         setSubscribeEvents(filteredEvents);
       });
     }
+  };
+  useEffect(() => {
+    newPromise();
   }, [user]);
 
   return (
