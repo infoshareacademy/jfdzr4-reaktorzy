@@ -58,7 +58,7 @@ export const ActivityChart = () => {
 
   let chartDay = new Date();
   chartDay.getDate();
-  for (let day = 0; day < 365; day++) {
+  for (let day = 0; day < 364; day++) {
     if (day < 7 - dayOfWeek) {
       chartDay = new Date();
       chartDay.setDate(chartDay.getDate() + (7 - dayOfWeek - day));
@@ -128,6 +128,7 @@ export const ActivityChart = () => {
           {activityChart.map((box) => {
             return (
               <div
+                key={box.date}
                 style={{
                   width: "1.4%",
                   height: "11%",

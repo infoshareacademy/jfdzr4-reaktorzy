@@ -7,7 +7,7 @@ import { UserContext } from "../../controllers/user-context";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Stack } from "@mui/material";
-
+import { Auth } from "../auth/Auth";
 import Avatar from "@mui/material/Avatar";
 
 import { DATABASE_URL } from "../../firebase-config";
@@ -134,11 +134,6 @@ export const MyAccount = () => {
             </>
         </ProfileWrapper>
     );
-
-
-
-
-
 };
 
 
