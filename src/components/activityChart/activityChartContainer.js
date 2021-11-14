@@ -4,7 +4,7 @@ export const ActivityChartContainer = styled.div`
   display: flex;
   flex-direction: row;
   background-color: white;
-  width: 80%;
+  width: 89%;
   height: calc(100vw / 7);
   justify-content: center;
   border-radius: 4px;
@@ -16,7 +16,7 @@ export const DayName = styled.div`
   flex-direction: column;
   justify-content: space-around;
   margin: 5px;
-  padding-top: 3%;
+  padding-top: 4%;
   padding-bottom: 0.5%;
 `;
 
