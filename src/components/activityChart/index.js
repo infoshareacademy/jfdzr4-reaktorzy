@@ -128,6 +128,7 @@ export const ActivityChart = () => {
           {activityChart.map((box) => {
             return (
               <div
+                key={box.date}
                 style={{
                   width: "1.4%",
                   height: "11%",
