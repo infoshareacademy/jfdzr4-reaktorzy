@@ -57,23 +57,3 @@ export const Profile = () => {
 
     )
 }
-                      <Button
-                        className="eventRow-button"
-                        component={Link}
-                        to={`/eco-actions/${ecoEvent.id}`}
-                      >
-                        Learn More
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-        </div>
-      ) : (
-        <LogOutProfil />
-      )}
-    </>
-  );
-};
