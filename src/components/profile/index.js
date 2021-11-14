@@ -78,6 +78,7 @@ export const Profile = () => {
                   flexDirection: "column",
                   alignItems: "center",
                   width: "288px",
+                  margin: "0 15px",
                 }}
               >
                 <Typography className="green-event-title-content">
