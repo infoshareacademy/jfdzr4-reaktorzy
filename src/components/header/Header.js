@@ -33,7 +33,7 @@ export const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 export function Header() {
-  const { isLoggedIn, userName } = useContext(UserContext);
+  const { isLoggedIn, userName, avatarUrl} = useContext(UserContext);
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [isOpen, setIsOpen] = useState(false)
@@ -114,7 +114,7 @@ export function Header() {
             >
               <Tooltip title="Account settings">
                 <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
-                  <Avatar sx={{ width: 32, height: 32, backgroundColor: 'white', color: 'rgb(24, 140, 24)' }}>
+                  <Avatar sx={{ width: 32, height: 32, backgroundColor: 'white', color: 'rgb(24, 140, 24)' }} src={avatarUrl}>
                     {firstLetterName}
                   </Avatar>
                 </IconButton>
