@@ -46,10 +46,17 @@ export const Profile = () => {
           style={{
             display: "flex",
             flexDirection: "column",
-            margin: "auto",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              alignItems: "center",
+              marginBottom: "20px",
+            }}
+          >
             <Typography className="green-event-title-content">
               Activity chart
             </Typography>
