@@ -154,16 +154,12 @@ export function Header() {
               transformOrigin={{ horizontal: "right", vertical: "top" }}
               anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
             >
-              <MenuItem>
-                <Avatar /> My account
-              </MenuItem>
+              
+                <MenuItem>
+                  <Avatar /> 
+                  <Link to='/my-account' className="nav__button nav__button-my-account">My account</Link>
+                </MenuItem>
               <Divider />
-              <MenuItem>
-                <ListItemIcon>
-                  <Settings fontSize="small" />
-                </ListItemIcon>
-                Settings
-              </MenuItem>
               <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
                   <Logout fontSize="small" />

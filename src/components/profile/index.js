@@ -10,29 +10,41 @@ import '../ecoActions/row/index.css'
 import { ProfileEvents } from "./profileEvents"
 import { ActivityChart } from "../activityChart";
 import { ScoreTable } from "../scoreTable";
-
+import { Auth } from "../auth/Auth";
 
 export const Profile = () => {
  
-    const {user, subscribeEvents, setSubscribeEvents} = useContext(SubscribeEventContex)
+ const {user, subscribeEvents, setSubscribeEvents} = useContext(SubscribeEventContex)
 
-    useEffect(()=>{
-        if(user){
-        Promise.all([
-            fetch(`${DATABASE_URL}/ecoEvents.json`)
-            .then(r => r.json()),
-            fetch(`${DATABASE_URL}/subscribeEvents/${user.uid}.json`)
-            .then(r => r.json())
-        ]).then(([data, favouriteIds])=> {
-            const formattedData = Object.keys(data).map(key => ({id:key, ...data[key]}));
-            const filteredEvents = formattedData.filter(ecoEvent => (favouriteIds || []).includes(ecoEvent.id));
-            setSubscribeEvents(filteredEvents)
-        })
-        }
-    }, [user])
-    return (
-        <>
-       { !! user 
+  useEffect(() => {
+    if (user) {
+      Promise.all([
+        fetch(`${DATABASE_URL}/ecoEvents.json`).then((r) => r.json()),
+        fetch(`${DATABASE_URL}/subscribeEvents/${user.uid}.json`).then((r) =>
+          r.json()
+        ),
+      ]).then(([data, favouriteIds]) => {
+        const formattedData = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key],
+        }));
+        const filteredEvents = formattedData.filter((ecoEvent) =>
+          (favouriteIds || []).includes(ecoEvent.id)
+        );
+        setSubscribeEvents(filteredEvents);
+      });
+    }
+  }, [user]);
+
+  return (
+    <>
+      <Auth>
+        <div>
+          <div style={{ display: "flex" }}>
+            <ActivityChart />
+            <ScoreTable />
+          </div>
+           { !! user 
             ? (<div>
                 <Box className="green-event-title">
                     <Typography className="green-event-title-content">Your subscribes</Typography>
@@ -53,27 +65,8 @@ export const Profile = () => {
                     </Box> 
                 </div>)
             : <LogOutProfil/>}
-        </>
-
-    )
-}
-                      <Button
-                        className="eventRow-button"
-                        component={Link}
-                        to={`/eco-actions/${ecoEvent.id}`}
-                      >
-                        Learn More
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
         </div>
-      ) : (
-        <LogOutProfil />
-      )}
+      </Auth>
     </>
   );
 };

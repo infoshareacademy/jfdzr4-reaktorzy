@@ -4,6 +4,8 @@
     background-size: cover;
     min-height: calc(100vh - 105px);
     min-width: 350px;
+    padding: 20px 10px;
+
 }
 
 .content__wrapper--no-background {
