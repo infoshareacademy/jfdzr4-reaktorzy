@@ -10,11 +10,11 @@ import '../ecoActions/row/index.css'
 import { ProfileEvents } from "./profileEvents"
 import { ActivityChart } from "../activityChart";
 import { ScoreTable } from "../scoreTable";
-
+import { Auth } from "../auth/Auth";
 
 export const Profile = () => {
  
-    const {user, subscribeEvents, setSubscribeEvents} = useContext(SubscribeEventContex)
+ const {user, subscribeEvents, setSubscribeEvents} = useContext(SubscribeEventContex)
 
   const newPromise =() =>{
     if(user){
@@ -34,9 +34,15 @@ export const Profile = () => {
         newPromise()
     }, [user])
 
-    return (
-        <>
-       { !! user 
+  return (
+    <>
+      <Auth>
+        <div>
+          <div style={{ display: "flex" }}>
+            <ActivityChart />
+            <ScoreTable />
+          </div>
+           { !! user 
             ? (<div>
                 <Box className="green-event-title">
                     <Typography className="green-event-title-content">Your subscribes</Typography>
@@ -57,7 +63,8 @@ export const Profile = () => {
                     </Box> 
                 </div>)
             : <LogOutProfil/>}
-        </>
-
-    )
-}
+        </div>
+      </Auth>
+    </>
+  );
+};
