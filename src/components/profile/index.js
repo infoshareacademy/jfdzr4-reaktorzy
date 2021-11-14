@@ -16,25 +16,23 @@ export const Profile = () => {
  
  const {user, subscribeEvents, setSubscribeEvents} = useContext(SubscribeEventContex)
 
-  useEffect(() => {
-    if (user) {
+  const newPromise =() =>{
+    if(user){
       Promise.all([
-        fetch(`${DATABASE_URL}/ecoEvents.json`).then((r) => r.json()),
-        fetch(`${DATABASE_URL}/subscribeEvents/${user.uid}.json`).then((r) =>
-          r.json()
-        ),
-      ]).then(([data, favouriteIds]) => {
-        const formattedData = Object.keys(data).map((key) => ({
-          id: key,
-          ...data[key],
-        }));
-        const filteredEvents = formattedData.filter((ecoEvent) =>
-          (favouriteIds || []).includes(ecoEvent.id)
-        );
-        setSubscribeEvents(filteredEvents);
-      });
-    }
-  }, [user]);
+          fetch(`${DATABASE_URL}/ecoEvents.json`)
+          .then(r => r.json()),
+          fetch(`${DATABASE_URL}/subscribeEvents/${user.uid}.json`)
+          .then(r => r.json())
+      ]).then(([data, favouriteIds])=> {
+          const formattedData = Object.keys(data).map(key => ({id:key, ...data[key]}));
+          const filteredEvents = formattedData.filter(ecoEvent => (favouriteIds || []).includes(ecoEvent.id));
+          setSubscribeEvents(filteredEvents)
+      })
+      }
+  }
+    useEffect(()=>{
+        newPromise()
+    }, [user])
 
   return (
     <>
@@ -58,7 +56,7 @@ export const Profile = () => {
                         <Grid className="grid-event-container" >
                             {subscribeEvents.map(ecoEvent => 
                                 <Grid>
-                                    <ProfileEvents key={ecoEvent.id} ecoEvent={ecoEvent}/>
+                                    <ProfileEvents key={ecoEvent.id} ecoEvent={ecoEvent} newPromise={newPromise}/>
                                 </Grid>
                             )}
                         </Grid>
