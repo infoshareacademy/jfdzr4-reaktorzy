@@ -1,11 +1,14 @@
 import { createContext, useState, useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getStorage, ref, getDownloadURL } from "@firebase/storage";
+
 
 export const UserContext = createContext({});
 
 export const UserActivityProvider = ({ children }) => {
   const [user, setUser] = useState('');
   const [userName, setUserName] = useState("");
+  const [avatarUrl, setAvatarUrl] = useState(null);
 
   useEffect(() => {
     listenOnAuthStateChanged();
@@ -19,6 +22,16 @@ export const UserActivityProvider = ({ children }) => {
 
       if (user) {
         setUserName(user.email);
+        const storage = getStorage();
+        const storageRef = ref(storage, `avatar/${user.uid}`);
+
+        getDownloadURL(storageRef)
+          .then(url => setAvatarUrl(url))
+          .catch(err => {
+
+          })
+      } else {
+        setAvatarUrl(null);
       }
     });
   };
@@ -28,6 +41,8 @@ export const UserActivityProvider = ({ children }) => {
       value={{
         isLoggedIn: user,
         userName,
+        avatarUrl,
+        setAvatarUrl
       }}
     >
       {children}
