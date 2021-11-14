@@ -40,15 +40,6 @@ export const EventDetails = (props) =>{
       return <LoadingEvents/>
     }
 
-  //   const fetchEvents = () => {
-  //     fetch(`${DATABASE_URL}/ecoEvents.json`)
-  //         .then(r => r.json())
-  //         .then(data => {
-  //             const formattedData = Object.keys(data).map(key => ({id: key, ...data[key]}));
-  //             setEcoEvents(formattedData);
-              
-  //         })          
-  // }
   const onButtonBackClick = () => {
     props.history.push('/eco-actions');
 }
@@ -79,10 +70,11 @@ export const EventDetails = (props) =>{
                         </p>
                         <p>{ecoEvent.id}</p>
                       </div>
-                      <div>
+                      <div className="eventDetails-button-container">
                           {!!user ? (
-                              <div className="eventDetails-button-container">
-                              {(ecoEvent.author === user.uid ) && <Button variant="contained" onClick={handleDeleted} color={'primary'} className="eventDetails-button">delete</Button>}
+                            <div>
+                              <div>
+                              {(ecoEvent.author === user.uid ) && <Button onClick={handleDeleted}  className="eventDetails-button button-delete">delete</Button>}
                                 {
                                 isSubscribe(params.id) ? <Button className="eventDetails-button" variant="contained" color={'success'}
                                  onClick={()=>handleStarClick(params.id)}>Unsubscribes</Button> 
@@ -90,6 +82,7 @@ export const EventDetails = (props) =>{
                                 } 
                                
                               </div>
+                            </div>
                                   )   
                           :  <Button variant="contained" color={'success'} size="small" className="eventDetails-button" onClick={handleClickOpen}>Subscribe</Button>
                           }
