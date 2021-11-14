@@ -18,7 +18,7 @@ import {
 } from "../../services";
 import { UserContext } from "../../controllers/user-context";
 import { MobileHistory } from "./MobileHistory";
-
+import { Auth } from "../auth/Auth";
 import "./History.scss";
 
 export const History = () => {
@@ -89,6 +89,7 @@ export const History = () => {
   };
   return (
     <>
+    <Auth>
       {isMobile ? (
         <MobileHistory handleClick={handleClick} rows={rows} />
       ) : (
@@ -226,6 +227,7 @@ export const History = () => {
           </Table>
         </TableContainer>
       )}
+      </Auth>
     </>
   );
 };

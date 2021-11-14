@@ -41,7 +41,7 @@ export const Content = () => {
             <MyAccount/>
         </Route>
         <Route path="/sign-in">
-          <SignIn />
+          < SignIn/>
         </Route>
         <Route path="/sign-up">
           <SignUp />
