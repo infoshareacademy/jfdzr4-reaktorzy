@@ -15,8 +15,12 @@ import { DATABASE_URL } from "../../firebase-config";
 import { getCurrentDate } from "../../controllers/get-date/getDate";
 import { ProgressContex } from "../context/ProgressContex";
 import { UserContext } from "../../controllers/user-context";
-import { loadDateActivity, sendDataActivity, totalCount } from "../../services";
-
+import {
+  loadDateActivity,
+  loadUserScore,
+  sendDataActivity,
+  totalCount,
+} from "../../services";
 
 export const Tiles = () => {
   const { setProgressLevel } = useContext(ProgressContex);
@@ -24,7 +28,6 @@ export const Tiles = () => {
   const userId = isLoggedIn.uid;
   const [activity, setActivity] = useState({});
   const currentDate = getCurrentDate();
-
 
   const [buttons, setButtons] = useState([
     {
@@ -105,8 +108,13 @@ export const Tiles = () => {
     setButtons(
       buttons.map((button) => {
         if (button.id === id) {
+          if (button.isDisabled) {
+            setActivity({ ...activity, [button.ecoAction]: false });
+          }
+          if (!button.isDisabled) {
+            setActivity({ ...activity, [button.ecoAction]: true });
+          }
           button.isDisabled = !button.isDisabled;
-          setActivity({ ...activity, [button.ecoAction]: true });
         }
         return button;
       })
@@ -141,7 +149,6 @@ export const Tiles = () => {
   }, []);
 
   useEffect(() => {
-    console.log(activity);
     const activityLevel = totalCount(activity);
     setProgressLevel(activityLevel);
     const dateActivity = { ...activity, total: activityLevel };
@@ -151,17 +158,20 @@ export const Tiles = () => {
   return (
     <>
       <div className="body-tabel">
-        <div className='tiles-container'>
+        <div className="tiles-container">
           {buttons.map((button) =>
             button.isDisabled ? (
               <button
                 className="tiles tiles-shadow"
                 key={button.id}
                 onClick={() => allFunction(button.id)}
-                disabled={button.isDisabled}
               >
                 {
-                  <img className="tiles-img"alt={button.alt}src={button.src}/>
+                  <img
+                    className="tiles-img"
+                    alt={button.alt}
+                    src={button.src}
+                  />
                 }
               </button>
             ) : (

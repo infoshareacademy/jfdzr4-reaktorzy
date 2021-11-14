@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 export const UserContext = createContext({});
 
 export const UserActivityProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
   const [userName, setUserName] = useState("");
 
   useEffect(() => {

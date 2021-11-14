@@ -37,3 +37,18 @@ export const totalCount = (row) => {
   );
   return progressLevel.length;
 };
+
+export const loadUserScore = (DATABASE_URL, userId) => {
+  return fetch(`${DATABASE_URL}/users/${userId}.json`);
+};
+
+export const sendUserScore = (DATABASE_URL, userId, score) => {
+  return fetch(`${DATABASE_URL}/usersScore/${userId}.json`, {
+    method: "PUT",
+    body: JSON.stringify({ score }),
+  });
+};
+
+export const loadAllUsersScore = (DATABASE_URL) => {
+  return fetch(`${DATABASE_URL}/usersScore.json`);
+};

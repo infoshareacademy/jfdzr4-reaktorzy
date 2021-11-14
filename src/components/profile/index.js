@@ -8,11 +8,12 @@ import { LogOutProfil } from "./profilLogOut"
 import '../ecoActions/index.css'
 import '../ecoActions/row/index.css'
 import { ProfileEvents } from "./profileEvents"
+import { ActivityChart } from "../activityChart";
+import { ScoreTable } from "../scoreTable";
 
 
-
-export const Profile = () =>{
-
+export const Profile = () => {
+ 
     const {user, subscribeEvents, setSubscribeEvents} = useContext(SubscribeEventContex)
 
     useEffect(()=>{
@@ -56,3 +57,23 @@ export const Profile = () =>{
 
     )
 }
+                      <Button
+                        className="eventRow-button"
+                        component={Link}
+                        to={`/eco-actions/${ecoEvent.id}`}
+                      >
+                        Learn More
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+        </div>
+      ) : (
+        <LogOutProfil />
+      )}
+    </>
+  );
+};
