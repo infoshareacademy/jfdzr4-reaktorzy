@@ -49,17 +49,13 @@ const handleFavourite = (eventId) => {
     })
 }
 
-    const handleDelete = (eventId) =>{
-        console.log(eventId)
-        }
-    
     const handleStarClick = (ecoEventId) => {
             handleFavourite(ecoEventId)
 
         }
 
     return(
-        <SubscribeEventContex.Provider value={{user, subscribeEvents, setSubscribeEvents, fetchSubscribeEvents, isSubscribe, handleDelete, handleFavourite, handleStarClick}}>
+        <SubscribeEventContex.Provider value={{user, subscribeEvents, setSubscribeEvents, fetchSubscribeEvents, isSubscribe, handleFavourite, handleStarClick}}>
             {children}
         </SubscribeEventContex.Provider>
     )

@@ -6,6 +6,7 @@ import {ThemeProvider} from "./App.styled";
 // import { ThemeProvider } from "./App.styled";
 import { SubscribeEventProvider } from "./components/context/SubscribeContex";
 import { EventContexProvider } from "./components/context/EventContext";
+import { EventBannerContextProvider } from "./components/context/EventImage";
 
 function App() {
   return (
@@ -13,12 +14,14 @@ function App() {
     <ThemeProvider>
       <SubscribeEventProvider>
         <EventContexProvider>
-          <ProgressContexProvider>
-            <UserActivityProvider>
-              <Header />
-              <Content />
-            </UserActivityProvider>
-          </ProgressContexProvider>
+          <EventBannerContextProvider>
+            <ProgressContexProvider>
+              <UserActivityProvider>
+                <Header />
+                <Content />
+              </UserActivityProvider>
+            </ProgressContexProvider>
+          </EventBannerContextProvider>
         </EventContexProvider>
       </SubscribeEventProvider>
     </ThemeProvider>

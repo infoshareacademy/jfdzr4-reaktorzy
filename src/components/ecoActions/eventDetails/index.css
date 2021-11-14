@@ -48,8 +48,13 @@
 
 .eventDetails-button{
     width: 80px;
-    font-size: 10px !important;
+    font-size: 8px !important;
     margin-right: 5px !important;
+}
+.button-delete:hover{
+    background-color: red !important; 
+    color: white !important;
+    opacity: 0.8 !important;
 }
 
 @media(min-width: 768px){
