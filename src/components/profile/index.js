@@ -104,7 +104,7 @@ export const Profile = () => {
                   <Grid className="grid-event-container">
                     {subscribeEvents.map((ecoEvent) => (
                       <Grid key={ecoEvent.id}>
-                        <ProfileEvents ecoEvent={ecoEvent} />
+                        <ProfileEvents ecoEvent={ecoEvent} key={ecoEvent.id} />
                       </Grid>
                     ))}
                   </Grid>

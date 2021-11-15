@@ -68,7 +68,7 @@ export const EcoActions = () => {
           {!!user && (
             <Button
               variant="contained"
-              color="warning"
+              color="primary"
               onClick={handleClickOpen}
             >
               Add Event
